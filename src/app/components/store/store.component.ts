@@ -24,6 +24,7 @@ export class StoreComponent implements AfterViewInit {
   constructor(private dataService: LostbornService) { } //Inject service in constructor...
 
   ngAfterViewInit(): void {
+    //call backend service for products
     this.dataService.getAllProductData().subscribe((data?: any[]) => {
       this.members = data || [];
       // Convert string representations to arrays

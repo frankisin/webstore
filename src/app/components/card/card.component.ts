@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { StarRatingComponent } from '../star-rating/star-rating.component';
+import { StarRatingModule } from 'angular-star-rating';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+
 
 interface FragranceImages {
   [key: string]: string;
@@ -10,7 +15,7 @@ interface FragranceImages {
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FontAwesomeModule, StarRatingComponent,StarRatingModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
@@ -31,6 +36,8 @@ export class CardComponent {
   
 
   constructor(private router: Router) { }
+
+  faCoffee = faCoffee;
 
   fragranceImages : FragranceImages = {
     'Cardamom':'https://cdn.scentbird.com/notes/rebrand/img-63-1.jpg?w=128&bgcolor=f7efe9',

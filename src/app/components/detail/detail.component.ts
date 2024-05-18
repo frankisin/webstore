@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
 import { CartService } from '../../services/cartservice.service';
@@ -29,7 +30,7 @@ export interface CartItem {
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, CardComponent, FormsModule],
+  imports: [NavbarComponent, CommonModule, CardComponent, FormsModule, StarRatingComponent],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
 })
