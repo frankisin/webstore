@@ -9,7 +9,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrl: './landing-page.component.css'
 })
 export class LandingPageComponent {
-  title: string = 'Lostborn'
+  title: string = 'Fragrance.'
   author: string = 'Frank Velazquez'
 
 }

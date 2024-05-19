@@ -52,6 +52,7 @@ export class ProdtableComponent implements AfterViewInit {
     'Weight',
     'Description',
     'Price',
+    'Type',
     'ImageUrl',
     'ProdStatus',
     'ProdFrag',
@@ -140,6 +141,7 @@ export interface Record {
   Weight: string;
   Description: string;
   Price: number;
+  Type: string;
   ImageUrl: string;
   ProdStatus: string[]; // Update the type accordingly based on the actual type of ProdStatus
   ProdFrag: string[]; // Update the type accordingly based on the actual type of ProdFrag

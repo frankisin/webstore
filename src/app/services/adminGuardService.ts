@@ -1,7 +1,7 @@
 // admin.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { AuthService } from './authService'; // Replace with your actual authentication service
+import { AuthService } from './authService'; //authentication service.
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +15,10 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): boolean | UrlTree {
     console.log('Is user admin: ',this.authService.isAdmin() );
     if (this.authService.isAdmin()) {
-
+      //If auth Service result for this user is true then canActivate is true. 
       return true;
     } else {
-      // Redirect to another route (e.g., 'home') if not admin
+      // Redirect to store.
       console.log('Welcome User');
       return this.router.parseUrl('/store');
     }

@@ -53,18 +53,18 @@ fieldset:disabled .btn {
     opacity: 0.65;
 }
 .cardcontainer{
-    margin-left: 40rem;
-    margin-right:40rem;
+    margin-left: 2rem;
+    margin-right:2rem;
 }
 
 .card-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Set the desired gap between cards */
+    gap: 2px; /* Set the desired gap between cards */
 }
 .card {
     width: 110%; /* Use 100% width for responsiveness */
-    max-height: 400px; /* Set the maximum height as needed */
+    max-height: 450px; /* Set the maximum height as needed */
     /* Add any other styling you need */
 }
 .btn-primary {
@@ -87,14 +87,10 @@ fieldset:disabled .btn {
     box-shadow: 0 0 0 0.25rem rgba(241, 46, 141, 0.5);
 }
 
-.btn-check:checked+.btn-primary,
-.btn-check:active+.btn-primary,
-.btn-primary:active,
-.btn-primary.active,
-.show>.btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: #be0761;
-    border-color: #b3075b;
+button.active {
+    color: #af6929; /* Or any color that fits your design */
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .btn-check:checked+.btn-primary:focus,

@@ -70,6 +70,7 @@ body,
 .card-body,
 .input-group,
 .input-group-lg {
+  background-color: black;
   font-family: var(--bs-font-sans-serif);
   color: #ffffff; /* Set the default color for the text */
   font-size: 1rem;

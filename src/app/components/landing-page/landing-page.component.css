@@ -239,17 +239,30 @@ header.masthead {
     overflow: hidden;
     padding-top: calc(7rem + 72px);
     padding-bottom: 7rem;
-    background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
+    background: url('https://wallpapers.com/images/hd/fragrance-1600-x-900-wallpaper-uraca1rpl5xsaiuh.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
     background-size: cover;
+    position: relative;
+}
+
+header.masthead::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay, adjust transparency as needed */
+    z-index: 1;
 }
 
 header.masthead .masthead-content {
-    z-index: 1;
     position: relative;
+    z-index: 2; /* Ensure content is above the overlay */
 }
+
 
 header.masthead .masthead-content .masthead-heading {
     font-size: 4rem;
@@ -265,7 +278,7 @@ header.masthead .bg-circle {
     z-index: 0;
     position: absolute;
     border-radius: 100%;
-    background: linear-gradient(0deg, #ee0979 0%, #ff6a00 100%);
+    background: linear-gradient(0deg, #6291ff 0%, #20f7ba 100%);
 }
 
 header.masthead .bg-circle-1 {

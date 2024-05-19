@@ -51,6 +51,7 @@ export class ProductContentComponent {
   weight = '';
   description = '';
   price = 0;
+  type = '';
   imageUrl = '';
   prodFrag: string[] = [];
   prodStatus: any[] = [];
@@ -93,6 +94,7 @@ export class ProductContentComponent {
     this.weight = data.row.Weight || '';
     this.description = data.row.Description || '';
     this.price = data.row.Price || 0;
+    this.type = data.row.Type || '';
     this.imageUrl = data.row.ImageUrl || '';
     this.prodFrag = data.row.ProdFrag || [];
     console.log('Prod frag data: ', this.prodFrag)
@@ -173,6 +175,7 @@ export class ProductContentComponent {
       weight: [this.weight, Validators.required ],
       description: [this.description, Validators.required],
       price: [this.price, Validators.required],
+      type: [this.type, Validators.required],
       imageUrl: [this.imageUrl, Validators.required],
       prodFrag: [this.fragranceSelectedValues, Validators.required],
       prodStatus: [this.statusSelectedValues, Validators.required],
@@ -213,6 +216,7 @@ export class ProductContentComponent {
       Weight: this.editForm.get('weight')?.value,
       Description: this.editForm.get('description')?.value,
       Price: this.editForm.get('price')?.value,
+      Type: this.editForm.get('type')?.value,
       ImageUrl: this.editForm.get('imageUrl')?.value,
       ProdFrag: JSON.stringify(selectedFragrances),
       ProdStatus: JSON.stringify(selectedStatuses),

@@ -257,15 +257,25 @@ header.masthead {
     overflow: hidden;
     padding-top: calc(7rem + 72px);
     padding-bottom: 7rem;
-    background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
+    background: url('https://wallpapers.com/images/high/fragrance-1500-x-1000-wallpaper-d4zq5v3ise7eh1gr.webp');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
     background-size: cover;
 }
+header.masthead::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Dark overlay, adjust transparency as needed */
+    z-index: 1;
+}
 
 header.masthead .masthead-content {
-    z-index: 1;
+    z-index: 2;
     position: relative;
 }
 

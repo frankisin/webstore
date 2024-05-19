@@ -4,12 +4,13 @@ import { CardComponent } from '../card/card.component';
 import { CommonModule } from '@angular/common'
 import { MatButtonModule } from '@angular/material/button';
 import { LostbornService } from '../../services/lostborn.service';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @Component({
   selector: 'app-store',
   standalone: true,
-  imports: [NavbarComponent, CardComponent, CommonModule, MatButtonModule],
+  imports: [NavbarComponent, CardComponent, CommonModule, MatButtonModule, MatTabsModule],
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css'],
   providers: [LostbornService],
@@ -17,7 +18,18 @@ import { LostbornService } from '../../services/lostborn.service';
 export class StoreComponent implements AfterViewInit {
 
   dataSourceLength: number = 0;
+  cologneLength : number = 0;
+  perfumeLength : number = 0; 
+  
+
+
   members: any[] = []; // Define members array
+  colognes : any[] = [];
+  perfumes : any[] = []; 
+
+
+  canEdit : boolean = true;
+  viewState : string = ''; // 
 
   rating: number = 3.5; // or any initial value
 
@@ -33,7 +45,18 @@ export class StoreComponent implements AfterViewInit {
         member.ProdStatus = JSON.parse(member.ProdStatus);
       });
 
+      this.members.forEach(member =>{
+        if(member.Type === 'cologne'){
+          this.colognes.push(member);
+        }else if(member.Type === 'perfume'){
+          this.perfumes.push(member);
+        }
+      });
+
       this.dataSourceLength = this.members.length;
+      this.cologneLength = this.colognes.length;
+      this.perfumeLength = this.perfumes.length;
+
       console.log(this.members);
     });
   }
@@ -118,8 +141,13 @@ export class StoreComponent implements AfterViewInit {
       imageUrlDetail: 'https://cdn.scentbird.com/product/rebrand/img-3261-1.jpg?w=640&bgcolor=fff',
     },
   ];
+  setViewState(state : string): void {
+    this.viewState = state;
+    console.log('State: ',this.viewState);
+  }
   ngOnInit(): void {
-
+    this.viewState = 'cologne';
+    console.log(this.viewState);
   }
 }
 

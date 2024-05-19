@@ -13,6 +13,7 @@
             <p><span style="color: #ff4081; text-decoration: underline;">Weight:</span> {{ weight }}</p>
             <p><span style="color: #ff4081; text-decoration: underline;">Description:</span> {{ description }}</p>
             <p><span style="color: #ff4081; text-decoration: underline;">Price:</span> {{ price }}</p>
+            <p><span style="color: #ff4081; text-decoration: underline;">Type:</span> {{ type }}</p>
             <p><span style="color: #ff4081; text-decoration: underline;">ProdStatus:</span> {{ prodStatus }}</p>
             <p><span style="color: #ff4081; text-decoration: underline;">ProdFrag:</span> {{ prodFrag }}</p>
             <p><span style="color: #ff4081; text-decoration: underline;">DescriptionLong:</span> {{ descriptionLong }}
@@ -49,6 +50,11 @@
                         <mat-form-field>
                             <mat-label>Price</mat-label>
                             <input matInput formControlName="price" placeholder="Price" (input)="onChanged()" />
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Type</mat-label>
+                            <input matInput formControlName="type" placeholder="Type" (input)="onChanged()" />
                         </mat-form-field>
 
                         <mat-form-field>
