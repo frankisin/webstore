@@ -21,11 +21,14 @@ export class StoreComponent implements AfterViewInit {
   cologneLength : number = 0;
   perfumeLength : number = 0; 
   
+  
 
 
   members: any[] = []; // Define members array
   colognes : any[] = [];
   perfumes : any[] = []; 
+  cologneChunks: any[] = [];
+  perfumeChunks: any[] = [];
 
 
   canEdit : boolean = true;
@@ -36,7 +39,7 @@ export class StoreComponent implements AfterViewInit {
   constructor(private dataService: LostbornService) { } //Inject service in constructor...
 
   ngAfterViewInit(): void {
-    //call backend service for products
+    // Call backend service for products
     this.dataService.getAllProductData().subscribe((data?: any[]) => {
       this.members = data || [];
       // Convert string representations to arrays
@@ -44,22 +47,26 @@ export class StoreComponent implements AfterViewInit {
         member.ProdFrag = JSON.parse(member.ProdFrag);
         member.ProdStatus = JSON.parse(member.ProdStatus);
       });
-
-      this.members.forEach(member =>{
-        if(member.Type === 'cologne'){
+  
+      this.members.forEach(member => {
+        if (member.Type === 'cologne') {
           this.colognes.push(member);
-        }else if(member.Type === 'perfume'){
+        } else if (member.Type === 'perfume') {
           this.perfumes.push(member);
         }
       });
-
+  
       this.dataSourceLength = this.members.length;
       this.cologneLength = this.colognes.length;
       this.perfumeLength = this.perfumes.length;
-
+  
+      this.cologneChunks = this.chunkArray(this.colognes, 6);
+      this.perfumeChunks = this.chunkArray(this.perfumes, 6);
+  
       console.log(this.members);
     });
   }
+  
 
   cards: any[] = [
     {
@@ -146,8 +153,15 @@ export class StoreComponent implements AfterViewInit {
     console.log('State: ',this.viewState);
   }
   ngOnInit(): void {
-    this.viewState = 'cologne';
+    this.viewState = 'perfume';
     console.log(this.viewState);
+  }
+  chunkArray(arr: any[], chunkSize: number): any[] {
+    let chunks = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      chunks.push(arr.slice(i, i + chunkSize));
+    }
+    return chunks;
   }
 }
 

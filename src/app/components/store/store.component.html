@@ -1,3 +1,4 @@
+<!-- Your Template -->
 <main class="main">
     <div class="content" style="background-color: rgb(253, 253, 252);">
         <div class="navbarcontainer">
@@ -6,13 +7,11 @@
             <div class="masthead-container">
                 <header class="masthead text-center text-white">
                     <div class="masthead-content">
-                        <div class="container px-5">
-
-                        </div>
+                        <div class="container px-5"></div>
                     </div>
                 </header>
             </div>
-            <div class="container px-5" style="display: flex; align-items: center;margin-bottom: 1rem;">
+            <div class="container px-5" style="display: flex; align-items: center; margin-bottom: 1rem;">
                 <h3 style="margin: 0; color: #000000;">BROWSE</h3>
                 <button mat-button (click)="setViewState('perfume')" [ngClass]="{'active': viewState === 'perfume'}"
                     style="font-size: 1.8rem; margin-left: 0px; margin-right: 0px;">PERFUMES</button>
@@ -22,7 +21,6 @@
             </div>
 
             <!--Cards-->
-
             <div *ngIf="viewState === 'cologne'; else perfumeBlock">
 
                 <!--Header Images-->
@@ -61,12 +59,6 @@
                         </div>
                     </div>
                 </div>
-                <div>
-
-                </div>
-
-
-
                 <div class="container px-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 style="margin: 0; margin-left: 30px;color: #af6929;">Now browsing {{cologneLength}}
@@ -78,25 +70,46 @@
                             <button mat-stroked-button style="margin-left: 1rem;">Personalize</button>
                         </div>
                     </div>
-                    <div class="cardContainer">
-                        <section>
-                            <div class="row align-items-center">
-                                <div *ngFor="let card of colognes" class="col-sm-4 mb-3">
-                                    <app-card [id]="card.ID" [title]="card.Title" [weight]="card.Weight"
-                                        [description]="card.Description" [price]="card.Price" [imageUrl]="card.ImageUrl"
-                                        [prodFrag]="card.ProdFrag" [prodStatus]="card.ProdStatus"
-                                        [descriptionLong]="card.DescriptionLong" [inStock]="card.InStock"
-                                        [averageRating]="card.AverageRating" [imageUrlDetail]="card.ImageUrlDetail">
-                                    </app-card>
+                </div>
+                <div class="container px-5">
+                    <div *ngFor="let chunk of cologneChunks; let i = index">
+                        <div class="cardContainer">
+                            <section>
+                                <div class="row align-items-center">
+                                    <div *ngFor="let card of chunk" class="col-sm-4 mb-3">
+                                        <app-card [id]="card.ID" [title]="card.Title" [weight]="card.Weight"
+                                            [description]="card.Description" [price]="card.Price"
+                                            [imageUrl]="card.ImageUrl" [prodFrag]="card.ProdFrag"
+                                            [prodStatus]="card.ProdStatus" [descriptionLong]="card.DescriptionLong"
+                                            [inStock]="card.InStock" [averageRating]="card.AverageRating"
+                                            [imageUrlDetail]="card.ImageUrlDetail"></app-card>
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
+                        <!-- Insert cologne ad after every chunk -->
+                        <ng-container *ngIf="i < cologneChunks.length - 1">
+                            <figure class="mx-auto max-w-1440 u1cXZp mt-80 relative" data-testid="bottomBanner">
+                                <img class="color-transparent block w-full object-cover object-center bg-light-beige"
+                                    loading="lazy" decoding="async" alt="" style="height: 25rem; width: 100%;"
+                                    draggable="false"
+                                    src="https://imgcdn.scentbird.com/_/rt:fill/w:2880/ZnJvbnRiaXJkMi9pbWFnZXMvYmctZGVza3RvcF81MDUyZjAuanBn">
+                                <div class="absolute inset-0 flex h-full py-56 items-start px-16 mx-auto max-w-1168">
+                                    <div class="max-w-464">
+                                        <div class="MnuRIF text-h3 POI0zU">
+                                            <span>OVER 800 FRAGRANCES (AND COUNTING) ARE WAITING FOR YOU</span>
+                                        </div>
+                                        <a class="POxfBC mt-24 button px-32 G1Xuei isKqCl min-w-[320rem] V8zDV4"
+                                            href="/subscribe">Create your account</a>
+                                    </div>
+                                </div>
+                            </figure>
+                        </ng-container>
                     </div>
                 </div>
             </div>
-            <ng-template #perfumeBlock>
 
-                <!-- Buttons and other elements for perfumes -->
+            <ng-template #perfumeBlock>
                 <!--Header Images-->
                 <div class="container px-5">
                     <div class="row align-items-center custom-row">
@@ -133,12 +146,6 @@
                         </div>
                     </div>
                 </div>
-                <div>
-
-                </div>
-
-
-
                 <div class="container px-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 style="margin: 0; margin-left: 30px;color: #af6929;">Now browsing {{perfumeLength}}
@@ -150,19 +157,41 @@
                             <button mat-stroked-button style="margin-left: 1rem;">Personalize</button>
                         </div>
                     </div>
-                    <div class="cardContainer">
-                        <section>
-                            <div class="row align-items-center">
-                                <div *ngFor="let card of perfumes" class="col-sm-4 mb-3">
-                                    <app-card [id]="card.ID" [title]="card.Title" [weight]="card.Weight"
-                                        [description]="card.Description" [price]="card.Price" [imageUrl]="card.ImageUrl"
-                                        [prodFrag]="card.ProdFrag" [prodStatus]="card.ProdStatus"
-                                        [descriptionLong]="card.DescriptionLong" [inStock]="card.InStock"
-                                        [averageRating]="card.AverageRating" [imageUrlDetail]="card.ImageUrlDetail">
-                                    </app-card>
+                </div>
+                <div class="container px-5">
+                    <div *ngFor="let chunk of perfumeChunks; let i = index">
+                        <div class="cardContainer">
+                            <section>
+                                <div class="row align-items-center">
+                                    <div *ngFor="let card of chunk" class="col-sm-4 mb-3">
+                                        <app-card [id]="card.ID" [title]="card.Title" [weight]="card.Weight"
+                                            [description]="card.Description" [price]="card.Price"
+                                            [imageUrl]="card.ImageUrl" [prodFrag]="card.ProdFrag"
+                                            [prodStatus]="card.ProdStatus" [descriptionLong]="card.DescriptionLong"
+                                            [inStock]="card.InStock" [averageRating]="card.AverageRating"
+                                            [imageUrlDetail]="card.ImageUrlDetail"></app-card>
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
+                        <!-- Insert perfume ad after every chunk -->
+                        <ng-container *ngIf="i < perfumeChunks.length - 1">
+                            <figure class="mx-auto max-w-1440 u1cXZp mt-80 relative" data-testid="bottomBanner">
+                                <img class="color-transparent block w-full object-cover object-center bg-light-beige"
+                                    loading="lazy" decoding="async" alt="" style="height: 25rem; width: 100%;"
+                                    draggable="false"
+                                    src="https://imgcdn.scentbird.com/_/rt:fill/w:2880/ZnJvbnRiaXJkMi9pbWFnZXMvYmctZGVza3RvcF81MDUyZjAuanBn">
+                                <div class="absolute inset-0 flex h-full py-56 items-start px-16 mx-auto max-w-1168">
+                                    <div class="max-w-464">
+                                        <div class="MnuRIF text-h3 POI0zU">
+                                            <span>OVER 800 FRAGRANCES (AND COUNTING) ARE WAITING FOR YOU</span>
+                                        </div>
+                                        <a class="POxfBC mt-24 button px-32 G1Xuei isKqCl min-w-[320rem] V8zDV4"
+                                            href="/subscribe">Create your account</a>
+                                    </div>
+                                </div>
+                            </figure>
+                        </ng-container>
                     </div>
                 </div>
             </ng-template>
@@ -190,6 +219,7 @@
                     </div>
                 </div>
             </section>
+
             <footer class="py-5 bg-black">
                 <div class="container px-5">
                     <p class="m-0 text-center text-white small">Copyright &copy; Lostborn 2024</p>

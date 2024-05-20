@@ -76,6 +76,16 @@ body,
   font-size: 1rem;
 }
 /* Styling for navbar-brand when hovered */
+/* For when the user is logged in */
+.logo-center-loggedin {
+  margin-right: 0rem;
+  margin-left: 3rem;
+}
+
+/* For when the user is not logged in */
+.logo-center-notloggedin {
+  margin-right: 10rem; /* Adjust this value based on your design needs */
+}
 
 
 /* Styling to transform navbar-brand into the logout button */

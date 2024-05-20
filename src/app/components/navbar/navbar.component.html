@@ -21,12 +21,11 @@
                 </li>
             </ul>
 
-            <div style="margin:0%;">
+            <div [class.logo-center-loggedin]="isLoggedIn" [class.logo-center-notloggedin]="!isLoggedIn">
                 <!-- Centered Logo -->
-                <a class="navbar-brand mx-auto" href="/home" style="font-size: 2rem;">
-                    Fragrance
-                </a>
+                <a class="navbar-brand mx-auto" href="/home" style="font-size: 1.8rem;"><p>Fragrance.</p></a>
             </div>
+            
 
             <!-- Right items -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -37,6 +36,7 @@
             <div style="border-right: 1px solid white; padding-right: 10px;" *ngIf="isLoggedIn">
                 <h4 style="color: white; margin-bottom: 0;">Welcome, {{ curUser }}</h4>
             </div>
+ 
             <div style="border-right: 1px solid white; padding-right: 10px; padding-bottom: 3px;" *ngIf="isLoggedIn">
                 <a class="nav-link" (click)="logout()" style="color:#ffffff" href="login">Logout</a>
             </div>
