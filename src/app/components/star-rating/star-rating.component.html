@@ -1,7 +1,9 @@
-<div id="container" style="margin-bottom: 0.5rem;">
-    <fa-icon [icon]="faStar"></fa-icon>
-    <fa-icon [icon]="faStar"></fa-icon>
-    <fa-icon [icon]="faStar"></fa-icon>
-    <fa-icon [icon]="faStar"></fa-icon>
-    <fa-icon [icon]="faStar"></fa-icon>
-</div>
+<div id="container" [class.readOnly]="readonly">
+    <fa-icon
+      *ngFor="let star of [5, 4, 3, 2, 1]"
+      [class.rated]="rating >= star"
+      [icon]="faStar"
+      (click)="setRating(star)"
+    ></fa-icon>
+  </div>
+  

@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<div class="container mt-5 pt-5" >
+    <div class="card">
+        <div class="card-body text-center">
+            <h1 class="display-4">Thank You for Your Purchase!</h1>
+            <p class="lead">Your order has been successfully processed.</p>
+            <hr class="my-4">
+            <h2>Invoice Details</h2>
+
+            <div *ngIf="invoice">
+                <p><strong>Invoice Number:</strong> {{ invoice.InvoiceNumber }}</p>
+                <p><strong>Date:</strong> {{ invoice.InvoiceDate | date:'medium' }}</p>
+                <p><strong>Total Amount:</strong> ${{ invoice.TotalAmount | number:'1.2-2' }}</p>
+
+                <h3>Items:</h3>
+                <div class="container">
+                    <div class="row">
+                        <div *ngFor="let item of invoice.InvoiceItems" class="col-md-6 mb-3">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <!-- Product Image -->
+                                        <div class="me-3">
+                                            <img [src]="item.Product.ImageUrlDetail" class="img-fluid rounded-3"
+                                                alt="{{ item.Product.Title }}" style="width: 100px;">
+                                        </div>
+
+                                        <div>
+                                            <!-- Product Title and Description -->
+                                            <h5>{{ item.Product.Title }}</h5>
+                                            <p class="small mb-0">{{ item.Product.Description }}</p>
+
+                                            <!-- Quantity and Price -->
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <span class="me-3"><strong>Quantity:</strong> {{ item.Quantity }}</span>
+                                                <span><strong>Total:</strong> ${{ (item.UnitPrice * item.Quantity) | number:'1.2-2' }}</span>
+                                              </div>
+                                              
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!invoice">
+                <p>Loading invoice details...</p>
+            </div>
+            <button 
+            class="btn-link-style align-left" href="store" style="padding-top: 2rem;">Back to shopping</button>
+        </div>
+    </div>
+</div>

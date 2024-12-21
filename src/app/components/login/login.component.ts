@@ -1,26 +1,33 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/authService';
 import { UserService } from '../../services/userService'; // Update the path
+import { LoadingService } from '../../services/loadingService';
+import { Observable, forkJoin, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, NavbarComponent],
+  imports: [ReactiveFormsModule, NavbarComponent, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  failedLoginAttempt : boolean = false;
+  errorMessage : string = '';
+  isLoggedIn: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService // Inject the UserService
+    private userService: UserService, // Inject the UserService
+    private loadingService: LoadingService
   ) {
     // Initialize the form with validators
     this.loginForm = this.fb.group({
@@ -28,13 +35,30 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
+  ngOnInit(): void {
+    this.authService.isLoggedIn().subscribe((logResult) => {
+      console.log('Login result:', logResult);
+      if(logResult){
+        this.router.navigate(['/profile']);
+      }
+      this.isLoggedIn = logResult;
+    })
+    if(this.isLoggedIn){
+      console.log('User is logged in, redirecting.');
+    }
+  }
 
   // Function to handle the login logic
   login(): void {
     const { username, password } = this.loginForm.value;
 
+    this.loadingService.show();
+
     // Call AuthService to send the login request
-    this.authService.login(username, password).subscribe(
+    this.authService.login(username, password).pipe(
+      finalize(() => {
+        this.loadingService.hide();  // Hide the overlay once the request completes
+      })).subscribe(
       (response: any) => {
         // Successfully logged in
         console.log('response: ', response);
@@ -64,8 +88,10 @@ export class LoginComponent {
       },
       // Handle login error
       (error) => {
-        console.error('Login failed', error);
-        // You can display an error message to the user
+        console.error('Login failed: ', error);
+        // trigger failed login attempt flag
+        this.failedLoginAttempt = true;
+        this.errorMessage = error;
       }
     );
   }

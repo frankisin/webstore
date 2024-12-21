@@ -49,9 +49,9 @@ export class StoreComponent implements AfterViewInit {
       });
   
       this.members.forEach(member => {
-        if (member.Type === 'cologne') {
+        if (member.Type === 'COLOGNE') {
           this.colognes.push(member);
-        } else if (member.Type === 'perfume') {
+        } else if (member.Type === 'PERFUME') {
           this.perfumes.push(member);
         }
       });
@@ -60,12 +60,25 @@ export class StoreComponent implements AfterViewInit {
       this.cologneLength = this.colognes.length;
       this.perfumeLength = this.perfumes.length;
   
+      this.colognes = this.shuffleArray(this.colognes);
+      this.perfumes = this.shuffleArray(this.perfumes);
+  
+      // Now chunk the shuffled arrays
       this.cologneChunks = this.chunkArray(this.colognes, 6);
       this.perfumeChunks = this.chunkArray(this.perfumes, 6);
   
       console.log(this.members);
     });
   }
+  // Fisher-Yates shuffle algorithm
+shuffleArray(array: any[]): any[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
   
 
   cards: any[] = [

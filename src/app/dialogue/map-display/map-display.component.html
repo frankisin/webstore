@@ -1,0 +1,71 @@
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <!-- Left Sidebar: Quarter Width -->
+    <div class="col-lg-3 p-3 h-100">
+      <div class="card shadow-sm sidebar-card h-100">
+        <div class="card-body d-flex flex-column h-100">
+          <!-- User Card -->
+          <div class="user-card card shadow-sm mb-4">
+            <div class="card-body d-flex align-items-center">
+              <img
+                [src]="user.profileImage || 'https://via.placeholder.com/80'"
+                alt="{{ user.name }}"
+                class="img-fluid rounded-circle me-3"
+                style="width: 80px; height: 80px;"
+              />
+              <div>
+                <h3>{{ user.name }}</h3>
+                <small>{{ user.email }}</small>
+              </div>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-primary btn-sm" (click)="centerMapOnUser()">
+                Center on Me
+              </button>
+              <button class="btn btn-primary btn-sm" (click)="toggleHazards()">
+                {{ hazardsVisible ? 'Hide Hazards' : 'Show Hazards' }}
+              </button>
+            </div>
+          </div>
+
+          <h1 class="mb-4">Stores</h1>
+          <div class="divider mb-3"></div>
+
+          <!-- Scrollable Store List -->
+          <div class="store-list flex-grow-1 overflow-auto">
+            <div *ngFor="let store of data.stores; let i = index" class="store-item card shadow-sm mb-4">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <img
+                    [src]="store.imageurl || 'https://via.placeholder.com/60'"
+                    alt="{{ store.name }}"
+                    class="img-fluid rounded me-3"
+                    style="width: 60px; height: 60px;"
+                  />
+                  <div>
+                    <strong>{{ store.name }}</strong><br />
+                    <small>{{ store.address }}</small>
+                  </div>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-sm btn-primary" (click)="centerMapOnStore(store)">
+                    View on Map
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary" (click)="showStoreDetails(store)">
+                    Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Column: Three-Quarter Width -->
+    <div class="col-lg-9 p-0 h-100">
+      <div id="map" style="height: 100%; width: 100%;"></div>
+    </div>
+  </div>
+</div>

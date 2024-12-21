@@ -19,13 +19,17 @@
                 <li class="nav-item" *ngIf="isAdmin">
                     <a class="nav-link" href="/dashboard" style="color:#ffffff">Admin</a>
                 </li>
+                <li class="nav-item" *ngIf="isAdmin">
+                    <a class="nav-link" href="/game" style="color:#ffffff">Game</a>
+                </li>
             </ul>
 
             <div [class.logo-center-loggedin]="isLoggedIn" [class.logo-center-notloggedin]="!isLoggedIn">
                 <!-- Centered Logo -->
-                <a class="navbar-brand mx-auto" href="/home" style="font-size: 1.8rem;"><p>Fragrance.</p></a>
+                <a class="navbar-brand mx-auto" href="/home" style="font-size: 1.8rem;">
+                    <p>Fragrance.</p>
+                </a>
             </div>
-            
 
             <!-- Right items -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -33,15 +37,20 @@
                     <a class="nav-link" href="login" style="color:#ffffff">Login</a>
                 </li>
             </ul>
-            <div style="border-right: 1px solid white; padding-right: 10px;" *ngIf="isLoggedIn">
-                <h4 style="color: white; margin-bottom: 0;">Welcome, {{ curUser }}</h4>
+
+            <div class="profile-section" *ngIf="isLoggedIn" style="border-right: 1px solid white; padding-right: 10px;">
+                <span>Welcome, {{ curUser }}</span>
+                <a href="profile">
+                    <img [src]="userProfilePicUrl" alt="Profile Picture" class="profile-pic" />
+                </a>
             </div>
- 
+
             <div style="border-right: 1px solid white; padding-right: 10px; padding-bottom: 3px;" *ngIf="isLoggedIn">
                 <a class="nav-link" (click)="logout()" style="color:#ffffff" href="login">Logout</a>
             </div>
+            
             <a class="nav-link" href="/checkout" *ngIf="isLoggedIn">
-                <span id="cartCount">{{ cartService.getTotalCartQuantity$() | async }}</span>
+                <span id="cartCount">{{ totalCartQuantity }}</span>
                 <img src="../../../assets/cart.png" alt="Checkout" height="30" style="margin-right: 15px;">
             </a>
         </div>

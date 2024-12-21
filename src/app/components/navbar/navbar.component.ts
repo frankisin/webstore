@@ -20,6 +20,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
   isLoggedIn: boolean = false;
   curUser: string = '';
+  totalCartQuantity: number = 0;
+  userProfilePicUrl: string = 'https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp';
 
   private cartItemsSubscription: Subscription | undefined;
 
@@ -33,22 +35,33 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit(): void {
+    this.isAdmin = false;
     this.isAdmin = this.authService.isAdmin();
-    this.isLoggedIn = this.authService.isLoggedIn();
-
+    
     try {
       this.curUser = this.userService.getUserName();
       this.getUserCart();
       // Subscribe to changes in cartItems$
+
+      this.authService.isLoggedIn().subscribe((logResult) => {
+        this.isLoggedIn = logResult;
+      })
+
+      // Subscribe to changes in cartItems$
       this.cartItemsSubscription = this.cartService.cartItems$.subscribe((cartItems) => {
+        console.log('Cart items updated:', cartItems);
         // Update your view logic here based on the new cartItems
+      });
+
+      this.cartService.getTotalCartQuantity$().subscribe(quantity => {
+        this.totalCartQuantity = quantity;
       });
     }
     catch (ex) {
       console.log(ex);
     }
   }
-  
+
 
   getCartItemCount(): number {
     const cartItems = this.cartService.getCartItems();

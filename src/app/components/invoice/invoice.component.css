@@ -1,0 +1,43 @@
+.card {
+    border-radius: 10px;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .img-fluid {
+    max-width: 100px; /* Limit the width */
+  }
+  
+  h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    font-size: 0.9rem;
+  }
+  /* Button styled like text */
+.btn-link-style {
+  background: none;
+  border: none;
+  color: #000000;
+  text-decoration: underline;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+/* Hover effect */
+.btn-link-style:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Focus state */
+.btn-link-style:focus {
+  outline: none;
+}
+  

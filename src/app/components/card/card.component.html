@@ -25,7 +25,8 @@
             <!--
                 Star Rating
             -->
-            <app-star-rating [rating]="averageRating"></app-star-rating>
+            <app-star-rating [rating]="averageRating" [readonly] = "true"></app-star-rating>
+            
             
 
             <!-- Iterate through the fragrances dictionary and display the images -->
@@ -40,7 +41,7 @@
                 <span>{{ '$' + price }}</span>
             </div>
             <div class="d-flex justify-content-center mt-3" style="margin-bottom: 1rem;">
-                <button class="btn btn-primary" style="width: 200px;">Add to Cart</button>
+                <button class="btn btn-primary" style="width: 200px;">View</button>
             </div>
         </div>
     </a>

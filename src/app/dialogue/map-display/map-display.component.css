@@ -1,0 +1,73 @@
+/* Fix container-fluid and row height */
+.container-fluid {
+  height: 100vh; /* Constrain the container to viewport height */
+}
+
+.row {
+  height: 100%; /* Allow the row to inherit height from the container */
+}
+
+/* Sidebar Card Styling */
+.sidebar-card {
+  height: 100%; /* Full height within the sidebar column */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevents content from spilling out */
+}
+
+/* Sidebar Content */
+.sidebar-card .card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensures full height within the sidebar card */
+}
+
+/* Scrollable Store List */
+.store-list {
+  flex-grow: 1; /* Takes up remaining vertical space in the sidebar */
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-height: 100%; /* Prevents the store list from exceeding parent height */
+  padding-right: 10px; /* Prevent scrollbar overlap */
+  margin-bottom: 0; /* Avoid pushing content below */
+}
+
+/* Individual Store Items */
+.store-item {
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.store-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Divider Styling */
+.divider {
+  border-bottom: 1px solid #ddd;
+  margin: 10px 0;
+}
+.user-card {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f8f9fa;
+}
+
+.user-card img {
+  border: 2px solid #ddd;
+  object-fit: cover;
+}
+
+.user-card h5 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.user-card small {
+  color: #666;
+}
+

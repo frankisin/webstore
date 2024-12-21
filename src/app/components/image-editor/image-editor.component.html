@@ -1,0 +1,68 @@
+<div class="editor-container">
+    <div class="column">
+      <h2>Edit Landing Page Images</h2>
+      <div class="scrollable">
+        <div *ngFor="let image of images; let i = index" class="image-editor-container">
+          <ng-container *ngIf="i === 0">
+            <h3>Main Coursel Image</h3>
+          </ng-container>
+          <img [src]="image.url" alt="Landing Image" class="landing-image" />
+          <div class="input-wrapper">
+            <input type="text" [(ngModel)]="image.url" placeholder="Image URL" />
+            <button (click)="saveImage(i)">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <h2>Edit Store Images</h2>
+      <div *ngFor="let image of store; let i = index" class="image-editor-container">
+        <ng-container *ngIf="i === 0">
+            <h3>Header Image</h3>
+        </ng-container>
+        <ng-container *ngIf="i === 1">
+            <h3>Footer Image</h3>
+        </ng-container>
+        <ng-container *ngIf="i === 2">
+            <h3>Ad Image</h3>
+        </ng-container>
+        <img [src]="image.url" alt="Store Image" class="landing-image" />
+        <div class="input-wrapper">
+          <input type="text" [(ngModel)]="image.url" placeholder="Image URL" />
+          <button (click)="saveStoreImage(i)">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <h2>Edit Product Images</h2>
+      <div class="type-toggle">
+        <button (click)="toggleType('colognes')" [class.active]="currentType === 'colognes'">Colognes</button>
+        <button (click)="toggleType('perfumes')" [class.active]="currentType === 'perfumes'">Perfumes</button>
+      </div>
+      <div *ngIf="currentType === 'colognes'">
+        <div class="scrollable">
+            <div *ngFor="let image of colognes; let i = index" class="image-editor-container">
+                <img [src]="image.url" alt="Cologne Image" class="landing-image" />
+                <div class="input-wrapper">
+                  <input type="text" [(ngModel)]="image.url" placeholder="Image URL" />
+                  <button (click)="saveTypeImage(i)">Save</button>
+                </div>
+              </div>
+        </div>
+        
+      </div>
+      <div *ngIf="currentType === 'perfumes'">
+        <div class="scrollable">
+            <div *ngFor="let image of perfumes; let i = index" class="image-editor-container">
+                <img [src]="image.url" alt="Perfume Image" class="landing-image" />
+                <div class="input-wrapper">
+                  <input type="text" [(ngModel)]="image.url" placeholder="Image URL" />
+                  <button (click)="saveTypeImage(i)">Save</button>
+                </div>
+              </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

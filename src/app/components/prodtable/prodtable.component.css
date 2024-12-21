@@ -1,17 +1,47 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 90%;
+}
 
-  table {
-    width: 100%;
-    table-layout: center;
-    margin-left: 5rem;
-    margin-right: 5rem;
-  }
-  .short-cell-height{
-    max-width: 5rem;
-  }
-  
-  th, td {
-    overflow: hidden;
-    width:auto;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+.select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.filter-field {
+  width: 400px;
+  margin-right: 10px;
+}
+
+.add-button {
+  margin-left: 10px;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+th, td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+td {
+  max-width: 150px; /* Adjust this value as needed */
+}
+
+.short-cell {
+  max-width: 100px; /* Adjust this value as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

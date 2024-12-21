@@ -1,162 +1,156 @@
 <app-navbar></app-navbar>
 <section class="h-100 h-custom">
-    <div class="container py-5 h-100" style="height: max-content;">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12">
-                <div class="card card-registration card-registration-2" style="padding-bottom: 3rem; border-radius: 15px;">
-                    <div class="card-body p-0">
-                        <div class="row g-0">
-                            <div class="col-lg-8" >
-                                <div class="p-5" >
-                                    <div class="d-flex justify-content-between align-items-center mb-5">
-                                        <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                                        <h6 class="mb-0 text-muted">{{ cartService.getTotalCartQuantity$() | async }} items</h6>
-                                        
-                                    </div>
+  <div class="container py-5 h-100" style="height: max-content;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
 
-                                    <div class="container" >
-                                        <div class="scrollable-container" >
-                                          <div *ngFor="let displayItem of displayCart" class="card mb-3">
-                                            <div class="card-body">
-                                              <div class="d-flex justify-content-between">
-                                                <div class="d-flex flex-row align-items-center">
-                                                  <div>
-                                                    <img [src]="displayItem.ProductDetails.ImageUrlDetail" class="img-fluid rounded-3" alt="{{ displayItem.Title }}" style="width: 65px;">
-                                                  </div>
-                                                  <div class="ms-3">
-                                                    <h5>{{ displayItem.Title }}</h5>
-                                                    <p class="small mb-0">{{ displayItem.Description }}</p>
-                                                  </div>
-                                                </div>
-                                                <div class="d-flex flex-row align-items-center">
-                                                    <div style="width: 50px; margin-right: 10px;">
-                                                      <!-- Add the 'style' attribute with 'width' to set the desired width -->
-                                                      <input [(ngModel)]="displayItem.Quantity" min="0" name="quantity" type="number" class="form-control form-control-sm"  />
-
-                                                    </div>
-                                                    
-                                                    <div style="width: 80px;">
-                                                      <h5 class="mb-0" style="font-size: 0.9rem;">${{ (displayItem.ProductDetails.Price * displayItem.Quantity).toFixed(2) }}</h5>
-                                                    </div>
-                                                  
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                      <a (click)="onDelete(userName, displayItem.ID)" class="text-muted delete-icon">
-                                                        <i class="material-icons">delete</i>
-                                                      </a>
-                                                    </div>
-                                                  </div>
-                                                  
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                        
-
-                                    
-
-                                    
-                                </div>
-                                <div class="position-absolute bottom-0 start-0 p-3">
-                                    <h6 class="mb-0"><a href="store" class="text-body"><i
-                                                class="fas fa-long-arrow-alt-left me-2"></i>Continue Shopping</a></h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="p-5">
-                                    <div class="card text-black rounded-5">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                                <h5 class="mb-0">Summary</h5>
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                                                    class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
-                                            </div>
-
-                                            <!--TODO Acceptable Payments-->
-
-
-                                            <form class="mt-4">
-                                                <div class="form-outline form-white mb-4">
-                                                    <input type="text" id="typeName"
-                                                        class="form-control form-control-lg" siez="17"
-                                                        placeholder="Cardholder's Name" />
-                                                    <label class="form-label" for="typeName">Cardholder's Name</label>
-                                                </div>
-
-                                                <div class="form-outline form-white mb-4">
-                                                    <input type="text" id="typeText"
-                                                        class="form-control form-control-lg" siez="17"
-                                                        placeholder="1234 5678 9012 3457" minlength="19"
-                                                        maxlength="19" />
-                                                    <label class="form-label" for="typeText">Card Number</label>
-                                                </div>
-
-                                                <div class="row mb-4">
-                                                    <div class="col-md-6">
-                                                        <div class="form-outline form-white">
-                                                            <input type="text" id="typeExp"
-                                                                class="form-control form-control-lg"
-                                                                placeholder="MM/YYYY" size="7" id="exp" minlength="7"
-                                                                maxlength="7" />
-                                                            <label class="form-label" for="typeExp">Expiration</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-outline form-white">
-                                                            <input type="password" id="typeText"
-                                                                class="form-control form-control-lg"
-                                                                placeholder="&#9679;&#9679;&#9679;" size="1"
-                                                                minlength="3" maxlength="3" />
-                                                            <label class="form-label" for="typeText">Cvv</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </form>
-
-                                            <hr class="my-4">
-
-                                            <div class="d-flex justify-content-between">
-                                                <p class="mb-2">Subtotal</p>
-                                                <p class="mb-2">${{ calculateSubtotal().toFixed(2) }}</p>
-                                              </div>
-                                              
-                                              <div class="d-flex justify-content-between">
-                                                <p class="mb-2">Shipping</p>
-                                                <p class="mb-2">$20.00</p>
-                                              </div>
-                                              
-                                              <div class="d-flex justify-content-between">
-                                                <p class="mb-2">Estimated Taxes</p>
-                                                <p class="mb-2">${{ (calculateSubtotal() * 0.07).toFixed(2) }}</p>
-                                              </div>
-                                              
-                                              <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-2">Total(Incl. taxes)</p>
-                                                <p class="mb-2">${{ (calculateSubtotal() * 0.07 + calculateSubtotal() + 20.00).toFixed(2) }}</p>
-                                              </div>
-                                              
-
-
-                                            <button class="btn btn-outline-dark flex-shrink-0 ms-auto" type="button"
-                                                style="min-width: 40%;">
-                                                <i class="bi-cart-fill me-1"></i>
-                                                Checkout {{(calculateSubtotal() * 0.07 + calculateSubtotal() + 20.00).toFixed(2)}}
-                                            </button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Loading Indicator -->
+        <div *ngIf="loading" class="text-center" style="padding-top: 10rem;">
+          <img src="loading-spinner.gif" alt="Loading..." />
         </div>
-        <div class="bg-circle-1 bg-circle"></div>
-        <div class="bg-circle-2 bg-circle"></div>
-        <div class="bg-circle-3 bg-circle"></div>
-        <div class="bg-circle-4 bg-circle"></div>
-    </div>
 
+        <!-- Empty Cart Section, only shown when not loading and cart is empty -->
+        <div *ngIf="!loading && displayCart.length === 0; else cartContent" class="text-center" style="padding-top: 10rem;">
+          <img src="https://cdn-icons-png.flaticon.com/512/17388/17388620.png" width="256" height="256"
+            alt="Empty Cart Icon" class="img-small mb-3" />
+          <h2>Your Cart is Empty</h2>
+          <button class="btn btn-primary btn-outline-dark mt-3" (click)="onGoStore()" style="max-width: 20%;">
+            Go Back to Store
+          </button>
+        </div>
+
+        <!-- Cart Content when items are present -->
+        <ng-template #cartContent>
+          <div class="card card-registration card-registration-2" style="padding-bottom: 3rem; border-radius: 15px;">
+            <div class="card-body p-0">
+              <div class="row g-0">
+                <div class="col-lg-8">
+                  <div class="p-5">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                      <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                      <h6 class="mb-0 text-muted">{{ cartService.getTotalCartQuantity$() | async }} items</h6>
+                    </div>
+                    <div class="container">
+                      <div class="scrollable-container">
+                        <div *ngFor="let displayItem of displayCart" class="card mb-3">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex flex-row align-items-center">
+                                <div>
+                                  <img [src]="displayItem.ProductDetails.ImageUrlDetail" class="img-fluid rounded-3"
+                                    alt="{{ displayItem.Title }}" style="width: 65px;">
+                                </div>
+                                <div class="ms-3">
+                                  <h5>{{ displayItem.Title }}</h5>
+                                  <p class="small mb-0">{{ displayItem.Description }}</p>
+                                </div>
+                              </div>
+                              <div class="d-flex flex-row align-items-center">
+                                <div style="width: 50px; margin-right: 10px;">
+                                  <input [(ngModel)]="displayItem.Quantity" min="0" name="quantity" type="number"
+                                    class="form-control form-control-sm" />
+                                </div>
+                                <div style="width: 80px;">
+                                  <h5 class="mb-0" style="font-size: 0.9rem;">
+                                    ${{ (displayItem.ProductDetails.Price * displayItem.Quantity).toFixed(2) }}
+                                  </h5>
+                                </div>
+                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                  <a (click)="onDelete(userName, displayItem.ID)" class="text-muted delete-icon">
+                                    <i class="material-icons">delete</i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="position-absolute bottom-0 start-0 p-3">
+                    <h6 class="mb-0"><a href="store" class="text-body">
+                      <i class="fas fa-long-arrow-alt-left me-2"></i>Continue Shopping</a>
+                    </h6>
+                  </div>
+                </div>
+
+                <!-- Right Column (Checkout Summary, Payment, and Shipping Info) -->
+                <div class="col-lg-4">
+                  <div class="p-5">
+                    <div class="card text-black rounded-5 mb-4">
+                      <div class="card-body">
+                        <!-- Summary Section -->
+                        <div class="checkout-section">
+                          <h5>Summary</h5>
+                          <div class="d-flex justify-content-between">
+                            <p>Subtotal</p>
+                            <p>${{ calculateSubtotal().toFixed(2) }}</p>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <p>Shipping</p>
+                            <p>$20.00</p>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <p>Estimated Taxes</p>
+                            <p>${{ (calculateSubtotal() * 0.07).toFixed(2) }}</p>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <strong>Total (Incl. taxes)</strong>
+                            <strong>${{ (calculateSubtotal() * 0.07 + calculateSubtotal() + 20.00).toFixed(2) }}</strong>
+                          </div>
+                        </div>
+                        <div class="divider my-4"></div>
+
+                        <!-- Payment Section -->
+                        <div class="checkout-section">
+                          <h5>Payment Method</h5>
+                          <div class="form-outline mb-3">
+                            <select id="existingPayments" class="form-select form-control-lg">
+                              <option *ngFor="let payment of paymentMethods" [value]="payment.id">
+                                {{ payment.cardHolderName }} (•••• {{ payment.cardNumber.slice(-4) }})
+                              </option>
+                            </select>
+                          </div>
+                          <div class="text-end mb-3">
+                            <button type="button" class="text-button" (click)="toggleAddPayment()">Add Payment Method</button>
+                          </div>
+                        </div>
+                        <div class="divider my-4"></div>
+
+                        <!-- Shipping Section -->
+                        <div class="checkout-section">
+                          <h5>Ship To</h5>
+                          <div class="form-outline mb-3">
+                            <select id="existingShipping" class="form-select form-control-lg">
+                              <option *ngFor="let address of shippingAddresses" [value]="address.id">
+                                {{ address.street }}, {{ address.city }}, {{ address.zipCode }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="text-end mb-3">
+                            <button type="button" class="text-button" (click)="toggleAddShipping()">Add Shipping Address</button>
+                          </div>
+                        </div>
+
+                        <!-- Checkout Button -->
+                        <div class="text-center " style="padding-top: 2rem;">
+                          <button class="btn btn-primary  btn-outline-dark btn-lg" (click)="onSubmit()" >
+                            Checkout ${{ calculateSubtotal().toFixed(2) }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="bg-circle-1 bg-circle"></div>
+    <div class="bg-circle-2 bg-circle"></div>
+    <div class="bg-circle-3 bg-circle"></div>
+    <div class="bg-circle-4 bg-circle"></div>
+  </div>
 </section>

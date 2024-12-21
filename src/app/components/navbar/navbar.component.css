@@ -91,3 +91,33 @@ body,
 /* Styling to transform navbar-brand into the logout button */
 
 /* Optionally, you can add transition for a smoother effect */
+.navbar .profile-pic {
+  width: 40px;  /* Adjusted size */
+  height: 40px;
+  border-radius: 100%;  /* Circular image */
+  object-fit: cover;   /* Ensures the image scales properly inside the circle */
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid white;  /* Optional: Add a white border to the image */
+}
+
+
+.profile-section {
+  display: flex;
+  align-items: center;
+}
+
+.profile-section img.profile-pic {
+  width: 30px;  /* Adjust the size as needed */
+  height: 30px;
+  border-radius: 50%;  /* This makes the image circular */
+  object-fit: cover;   /* Ensures the image scales properly inside the circle */
+  margin-left: 10px;
+  cursor: pointer;
+  border: 2px solid white;  /* Optional: Add a white border to the image */
+}
+
+.profile-section span {
+  margin-right: 10px;
+}

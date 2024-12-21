@@ -1,0 +1,10 @@
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrolling if the game exceeds the screen */
+    background-color: #111; /* Optional: Add a background color for the game area */
+  }
+  

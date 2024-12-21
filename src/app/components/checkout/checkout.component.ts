@@ -1,40 +1,135 @@
-import { Component , NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Component, NgModule } from '@angular/core';
+import { FormBuilder, FormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CartService } from '../../services/cartservice.service';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, finalize } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadingService } from '../../services/loadingService';
+import { PaymentMethod } from '../../models/PaymentMethod';
+import { ShippingAddress } from '../../models/ShippingAddress';
+
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, FormsModule],
+  imports: [NavbarComponent, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent {
-  constructor(public cartService: CartService) { }
+  checkoutModel: any;
 
+  checkoutForm: FormGroup;
   cartItems: any[] = []; // Assuming your cartItems structure
   displayCart: any[] = [];
   userName: string = '';
 
-  ngOnInit(): void {
-    let user = this.cartService.getUsername();
-    let cart = this.cartService.getCartItems();
+  selectedShippingAddress: any; // Holds the selected shipping address
+  selectedPaymentMethod: any; // Holds the selected payment method
+
+  shippingForm: FormGroup;
+
+  showAddPaymentForm = false;
+  showAddShippingForm = false;
+  loading = true;
+  
+
+  paymentMethods: PaymentMethod[] = []; // Array to hold existing payment methods
+  shippingAddresses: ShippingAddress[] = [];
 
   
-    if (user !== null) {
-      this.userName = user;
-      console.log('user cart initialized: ', user);
-      this.cartService.cartItems$.subscribe((cartItems) => {
-        // Handle cart items in the checkout component
-        this.transformCartItems(cartItems);
-      });
-    } else {
-      console.error('Username not available');
-      // Handle the case where the username is null, show an error, redirect, or take appropriate action
+
+  constructor(public cartService: CartService, private snackBar: MatSnackBar, private loadingService: LoadingService, private router: Router, private fb: FormBuilder) {
+    this.checkoutForm = new FormGroup({
+      cardHolderName: new FormControl(''),
+      cardNumber: new FormControl(''),
+      expirationDate: new FormControl(''),
+      cvv: new FormControl('')
+    });
+    this.shippingForm = this.fb.group({
+      streetAddress: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      zipCode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]]
+    });
+  }
+  
+  
+
+
+
+  ngOnInit(): void {
+  this.loading = true; // Start with loading spinner visible
+
+  console.log('Loading flag: ',this.loading);
+
+  this.shippingAddresses = [
+    new ShippingAddress(1, 101, '123 Main St', 'Anytown', 'CA', '90210',true),
+    new ShippingAddress(2, 101, '456 Elm St', 'Othertown', 'NY', '10001',false)
+  ];
+
+  this.paymentMethods = [
+    {
+      id: 1,
+      cardNumber: '1234 5678 9012 3456',
+      cardHolderName: 'Frank Velazquez',
+      expirationDate: '09/2025',
+      cvv: '079',
+      isDefault: true,
+      type: 'visa',
+      pictureUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png',
+      isPrimary:true
+    },
+    {
+      id: 2,
+      cardNumber: '9876 5432 1098 7654',
+      cardHolderName: 'Frank Velazquez',
+      expirationDate: '09/2025',
+      cvv: '258',
+      isDefault: false,
+      type: 'mastercard',
+      pictureUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg',
+      isPrimary: false
     }
+  ];
+  
+
+  // Automatically set the first payment method as selected when loaded
+  this.selectedPaymentMethod = this.paymentMethods[0];  // Select the first payment method by default
+  this.selectedShippingAddress = this.shippingAddresses[0];
+
+  const user = this.cartService.getUsername();
+  if (user) {
+    this.userName = user;
+
+    // Subscribe to cart items observable
+    this.cartService.cartItems$.subscribe({
+      next: (cartItems) => {
+        this.transformCartItems(cartItems);
+        console.log('Cart fetched.');
+        // Set loading to false only after data is fetched
+    
+      },
+      error: (err) => {
+        console.error('Error fetching cart items:', err);
+        this.loading = false; // Stop loading if there's an error
+      },
+    });
+  } else {
+    console.error('Username not available');
+ 
+  }
+  
+  this.loading = false;
+  console.log('Loading flag: ',this.loading);
+}
+
+  
+  onGoStore(): void {
+    this.router.navigate(['/store']);
   }
   // Calculate subtotal for all items in the cart
   calculateSubtotal(): number {
@@ -47,40 +142,92 @@ export class CheckoutComponent {
 
     return subtotal;
   }
+  onSubmit() {
 
+    this.loadingService.show();
+
+    // Extract values from the form
+    const { cardHolderName, cardNumber, expirationDate, cvv } = this.checkoutForm.value;
+
+    //get total price...
+    const totalPrice = this.calculateTotal();
+
+    console.log('Form data submitted:', this.checkoutForm.value);
+
+    console.log('Total price: ', totalPrice.toFixed(2));
+
+    this.cartService.checkout(cardHolderName, cardNumber, expirationDate, cvv, totalPrice.toString())
+      .pipe(
+        finalize(() => {
+          this.loadingService.hide();  // Hide the overlay once the request completes (either success or error)
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          console.log('Checkout successful', response);
+          // Optionally, add success handling logic here
+          this.loadingService.hide();
+
+          this.router.navigate(['/checkout/invoice', { id: response.Invoice.InvoiceID }]);
+
+        },
+        error: (error) => {
+          this.loadingService.hide();
+          console.error('Checkout failed', error);
+          // Optionally, add error handling logic here
+        }
+      });
+  }
+  toggleAddPayment(): void {
+    this.showAddPaymentForm = !this.showAddPaymentForm;
+  }
+
+  toggleAddShipping(): void {
+    this.showAddShippingForm = !this.showAddShippingForm;
+  }
+  calculateTotal(): number {
+    return this.calculateSubtotal() * 1.07 + 20; // Example calculation
+  }
   
-  
-  
+
   onDelete(username: string, itemId: number): void {
-    console.log('Deleting username: ',username, ' item ID: ',itemId);
+    console.log('Deleting username: ', username, ' item ID: ', itemId);
+
+    this.loadingService.show();
+    this.loading = true;
     this.cartService.deleteCartItem(username, itemId).subscribe(
       (response) => {
-        // Handle success, you might want to update your UI or take other actions
-        console.log('Item deleted from cart:', response);
-
-        // Assuming you want to refresh the cart items after deletion
-        this.cartService.fetchUserCart().subscribe(
-          (userCart) => {
-            // Update local cartItems and notify subscribers
+        this.loadingService.hide();
+        this.loading = false;
+        // If response contains updated cart items, directly update the cart
+        if (response) {
+          console.log('response after deletion:', response);
+          this.cartService.setCartItems(response.Cart.CartItems);
+          
+          // Show success toast notification
+          this.snackBar.open('Item removed from cart!', 'Close', {
+            duration: 3000,
+          });
+        } else {
+          // Fallback: fetch the cart if the API doesn't return updated cart items
+          this.cartService.fetchUserCart().subscribe((userCart) => {
             if (userCart && userCart.CartItems) {
-              console.log('User Cart Initialized for checkout: ', userCart);
-              this.cartItems = userCart.CartItems;
-              this.cartService.setCartItems(this.cartItems);
+              this.cartService.setCartItems(userCart.CartItems);
             }
-          },
-          (error) => {
-            console.error('Error fetching user cart after deletion:', error);
-          }
-        );
+          });
+        }
       },
       (error) => {
-        // Handle error
+        this.loadingService.hide();
         console.error('Error deleting item from cart:', error);
-        // You might want to show an error message to the user
+        this.snackBar.open('Error deleting item from cart. Please try again.', 'Close', {
+          duration: 3000,
+        });
       }
     );
-    location.reload();
   }
+
+
 
 
   transformCartItems(cartItems: any[]): void {
@@ -106,7 +253,7 @@ export class CheckoutComponent {
         const productDetails = productDetailsArray[i];
 
         const displayItem = {
-          ID : cartItem.ID,
+          ID: cartItem.ID,
           Title: productDetails.Title,
           Description: productDetails.Description,
           AverageRating: productDetails.AverageRating,

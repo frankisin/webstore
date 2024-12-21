@@ -1,0 +1,399 @@
+.card-profile {
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-profile img {
+    border-radius: 50%;
+  }
+  
+  .card-profile h5 {
+    font-size: 1.2rem;
+  }
+  /* Style for the rectangular "pill" */
+.custom-pill {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Rectangular shape with slightly rounded corners */
+.rectangular {
+  border-radius: 8px; /* Adjust the radius for softer corners */
+  width: auto;        /* Make them full-width */
+}
+
+/* Optional hover effect */
+.custom-pill:hover {
+  background-color: #e9ecef;
+  transition: background-color 0.2s;
+}
+
+  /* Default collapsed card */
+.collapsed-card {
+  height: 300px;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+/* Expanded card */
+.expanded-card {
+  height: 45rem;
+  overflow: auto;
+  transition: height 0.3s ease-in-out;
+}
+
+/* Scrollable container for order history */
+.order-history-scroll {
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 15px;
+}
+
+/* Styling for invoice and item cards */
+.invoice-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for invoice index number */
+.invoice-index {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background-color: #050505;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Styling for item cards */
+.item-card {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 0.9rem;
+  transition: box-shadow 0.2s;
+}
+
+.item-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Button styled like text */
+.btn-link-style {
+  background: none;
+  border: none;
+  color: #000000;
+  text-decoration: underline;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+/* Hover effect */
+.btn-link-style:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+/* Focus state */
+.btn-link-style:focus {
+  outline: none;
+}
+
+/* Align button to the left */
+.align-left {
+  text-align: left;
+  display: block; /* Ensures it behaves like a block element */
+  width: fit-content; /* Shrinks the width to fit the text */
+  margin-left: 0; /* Ensures no unexpected margins */
+}
+/* Close button for order history */
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff; /* Bootstrap primary color */
+  cursor: pointer;
+  transition: color 0.3s;
+  margin-left: 10px;
+}
+
+.close-button:hover {
+  color: #0056b3; /* Darker shade on hover */
+  text-decoration: none;
+}
+
+.close-button:focus {
+  outline: none;
+}
+.manage-payments-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.payment-methods-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.payment-method {
+  padding: 10px 0;
+}
+
+.payment-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.payment-icon {
+  width: 60px;               /* Adjust width for a balanced look */
+  height: 60px;              /* Make the height equal to width */
+  border-radius: 12px;        /* Subtle rounding for square shape */
+  border: 2px solid #007bff; /* Blue border like the button */
+  background-color: white;    /* White background to match the theme */
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow */
+  transition: transform 0.2s ease-in-out;   /* Hover effect */
+  object-fit: contain;        /* Maintain aspect ratio */
+}
+
+/* Hover effect */
+.payment-icon:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Divider styles */
+.divider {
+  height: 1px;
+  background-color: #ddd;
+  margin: 10px 0;
+}
+.edit-payment-btn {
+  color: #007bff;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.edit-payment-btn:hover {
+  text-decoration: none;
+}
+.payment-methods-container {
+  margin-bottom: 2rem;
+}
+
+.payment-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10%; /* Makes it more rectangular but with rounded edges */
+}
+
+.payment-controls button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.divider {
+  margin: 0.5rem 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+
+
+
+
+.payment-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-number {
+  font-weight: normal;
+  margin-left: 8px;
+  color: #757575;
+}
+
+.edit-link {
+  color: #1a73e8;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.edit-link:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 10px 0;
+}
+
+.add-payment-btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.btn-outline-primary {
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 24px;
+}
+.payment-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.add-payment-btn {
+  padding: 5px 12px;
+  font-size: 0.875rem;
+  border-radius: 5px;
+}
+.shipping-section {
+  margin-bottom: 20px;
+}
+
+
+.divider {
+  height: 1px;
+  background-color: #ddd;
+  margin: 10px 0;
+}
+.shipping-container {
+  margin-bottom: 2rem;
+}
+
+.shipping-address {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.shipping-icon {
+  font-size: 40px;
+  color: #007bff;
+}
+
+.edit-btn {
+  height: 36px;
+  font-size: 14px;
+  padding: 0.25rem 0.75rem;
+}
+.shipping-address-card:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.payment-method-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Full height wrapper to center the image vertically and horizontally */
+.profile-pic-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;  /* Ensure it takes up all available height */
+}
+
+/* Circular container to keep the image inside bounds */
+.profile-pic-wrapper {
+  overflow: hidden;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+/* Profile picture styles and zoom effect */
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-pic-wrapper:hover .profile-pic {
+  transform: scale(1.2); /* Zooms on hover */
+}
+.hover-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 15px;
+}
+
+.hover-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+.button-group .btn {
+  margin-right: 5px; /* Adjust this value as needed */
+}
+
+.button-group .btn:last-child {
+  margin-right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+  
+  

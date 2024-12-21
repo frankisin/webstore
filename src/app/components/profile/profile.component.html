@@ -1,0 +1,188 @@
+<app-navbar></app-navbar>
+<app-breadcrumb></app-breadcrumb>
+<div class="h-100 h-custom">
+  <div class="container py-5 h-100" style="height: max-content;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-profile" style="padding-bottom: 3rem; border-radius: 15px;">
+          <div class="card-body p-0">
+            <div class="row g-0">
+
+              <!-- Left Column (Profile Details) -->
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h1 class="fw-bold mb-0 text-black">{{firstName}} {{lastName}}'s Profile</h1>
+                  </div>
+
+                  <!-- Profile Picture -->
+                  <div class="d-flex justify-content-center align-items-center mb-5">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" class="rounded-circle"
+                      alt="Profile Picture" style="width: 120px; height: 120px;">
+                  </div>
+          
+
+                  <!-- Bordered Card for Username, Email, and Account Type -->
+                  <div class="card text-black rounded-5 mb-5">
+                    <div class="card-body">
+                      <div class="d-flex flex-column align-items-start">
+                        <span class="custom-pill rectangular p-3 mb-3">Username: {{ username }}</span>
+                        <span class="custom-pill rectangular p-3 mb-3">Email: {{ email }}</span>
+                        <span class="custom-pill rectangular p-3">Account Type: {{ accountType }}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Order History-->
+
+
+                  <button class="btn-link-style align-left" (click)="toggleOrderHistory()">
+                    {{ showOrderHistory ? 'Hide Order History' : 'View Order History' }}
+                  </button>
+
+
+                </div>
+              </div>
+
+              <!-- Right Column (Payment and Shipping Information) -->
+              <div class="col-lg-6">
+                <div class="p-5">
+
+                  <!-- Render Order History if Visible -->
+                  <div *ngIf="showOrderHistory" class="order-history-wrapper">
+                    <div class="order-history-container card text-black rounded-5 mb-5 expanded-card">
+                      <div class="card-body position-relative">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <h2 class="text-center mb-0">Order History</h2>
+
+                          <!-- Elegant X Button for Closing -->
+                          <button class="close-button" (click)="toggleOrderHistory()">
+                            &times;
+                          </button>
+                        </div>
+
+                        <!-- Scrollable Order History -->
+                        <div class="order-history-scroll mt-3">
+                          <div *ngFor="let invoice of invoices; let i = index" class="invoice-card mb-4">
+                            <div class="card shadow-sm position-relative hover-card">
+                              <!-- Invoice Index Counter at Top-Right -->
+                              <span class="invoice-index">{{ i + 1 }} of {{ invoices.length }}</span>
+
+                              <div class="card-body">
+                                <h4>Invoice #: {{ invoice.InvoiceNumber }}</h4>
+                                <p>{{ invoice.InvoiceDate | date: 'medium' }} | {{ invoice.PaymentStatus }}</p>
+
+                                <h5>Items:</h5>
+                                <div class="row">
+                                  <div *ngFor="let item of invoice.InvoiceItems" class="col-md-6 mb-3">
+                                    <div class="item-card card p-2">
+                                      <div class="d-flex align-items-center">
+                                        <img [src]="item.Product.ImageUrl" alt="{{ item.Product.Title }}"
+                                          class="img-fluid rounded"
+                                          style="width: 60px; height: 60px; margin-right: 10px;" />
+                                        <div>
+                                          <strong>{{ item.Product.Title }}</strong><br />
+                                          Qty: {{ item.Quantity }} | {{ item.UnitPrice | currency }}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <ng-template #noInvoices>
+                    <p>No invoices found.</p>
+                  </ng-template>
+
+
+
+
+                  <!-- Payment and Shipping Information -->
+                  <!--
+                    
+                  -->
+                  <div *ngIf="!showOrderHistory">
+                    <div class="payment-methods-container">
+                      <h2>Payment Methods</h2>
+                      <div class="divider"></div>
+
+                      <div *ngFor="let method of paymentMethods; let i = index" class="payment-method">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="d-flex align-items-center">
+                            <img [src]="getPaymentIconUrl(method.type)" alt="{{ method.type }} logo"
+                              class="payment-icon me-3" />
+                            <div>
+                              <strong>{{ method.cardHolderName }}</strong><br />
+                              •••• {{ method.cardNumber.slice(-4) }}
+                            </div>
+                          </div>
+
+                          <!-- Up/Down Arrows and Edit Button -->
+                          <div class="payment-controls d-flex align-items-center">
+                            <button *ngIf="i > 0" class="btn btn-outline-secondary btn-sm" (click)="movePaymentUp(i)">
+                              ↑
+                            </button>
+                            <button *ngIf="i < paymentMethods.length - 1" class="btn btn-outline-secondary btn-sm ms-1"
+                              (click)="movePaymentDown(i)">
+                              ↓
+                            </button>
+
+                            <button class="btn btn-sm ms-2">Edit</button>
+                          </div>
+                        </div>
+
+                        <!-- Divider between payment methods -->
+                        <div *ngIf="i < paymentMethods.length - 1" class="divider"></div>
+                      </div>
+
+                      <div class="divider"></div>
+                      <div class="payment-container">
+                        <p class="mb-0">Your default payment method will be charged first. You can reorder methods or
+                          remove them.</p>
+                        <button class="btn btn-outline-primary add-payment-btn" (click)="toggleAddPayment()">Add Payment
+                          Method</button>
+                      </div>
+                    </div>
+                    <div class="shipping-container">
+                      <h2>Shipping Address</h2>
+                      <div class="shipping-address">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="d-flex align-items-center">
+                            <div class="me-3">
+                              <i class="material-icons shipping-icon">local_shipping</i>
+                            </div>
+                            <div>
+                              <strong>Ship to Frank Velazquez</strong><br />
+                              123 Main St, Anytown, CA 90210
+                            </div>
+                          </div>
+                          <div class="button-group">
+                            <button class="btn btn-outline-primary edit-btn me-1" (click)="openMapDialog()">
+                              Map
+                            </button>
+                            <button class="btn btn-outline-primary edit-btn">
+                              Edit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

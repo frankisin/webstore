@@ -16,6 +16,8 @@
                                     </a>
                                     <h2 class="fw-bold mb-2 text-black text-uppercase">Fragrance.</h2>
                                     <p class="text-black-50 mb-5">Login for the best experience.</p>
+                                    <p *ngIf="failedLoginAttempt" class="error">{{ errorMessage }}</p>
+                                   
                                     <form [formGroup]="loginForm">
                                         <div class="form-outline form-black">
                                           <input type="email" id="typeEmailX" class="form-control form-control-lg" formControlName="username" />

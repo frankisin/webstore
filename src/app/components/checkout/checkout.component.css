@@ -43,70 +43,7 @@ fieldset:disabled .btn {
 .btn-outline-dark {
     width: 100%; /* You can adjust this value */
 }
-.btn-primary {
-    color: #fff;
-    background-color: #ffb8da;
-    border-color: #ee0979;
-}
 
-.btn-primary:hover {
-    color: #fff;
-    background-color: #ffffff;
-    border-color: #be0761;
-}
-
-.btn-check:focus+.btn-primary,
-.btn-primary:focus {
-    color: #fff;
-    background-color: #ca0867;
-    border-color: #be0761;
-    box-shadow: 0 0 0 0.25rem rgba(241, 46, 141, 0.5);
-}
-
-.btn-check:checked+.btn-primary,
-.btn-check:active+.btn-primary,
-.btn-primary:active,
-.btn-primary.active,
-.show>.btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: #be0761;
-    border-color: #b3075b;
-}
-
-.btn-check:checked+.btn-primary:focus,
-.btn-check:active+.btn-primary:focus,
-.btn-primary:active:focus,
-.btn-primary.active:focus,
-.show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.25rem rgba(241, 46, 141, 0.5);
-}
-
-.btn-primary:disabled,
-.btn-primary.disabled {
-    color: #fff;
-    background-color: #ee0979;
-    border-color: #ee0979;
-}
-
-.btn-secondary {
-    color: #000;
-    background-color: #ff6a00;
-    border-color: #ff6a00;
-}
-
-.btn-secondary:hover {
-    color: #000;
-    background-color: #ff8026;
-    border-color: #ff791a;
-}
-
-.btn-check:focus+.btn-secondary,
-.btn-secondary:focus {
-    color: #000;
-    background-color: #ff8026;
-    border-color: #ff791a;
-    box-shadow: 0 0 0 0.25rem rgba(217, 90, 0, 0.5);
-}
 
 .btn-check:checked+.btn-secondary,
 .btn-check:active+.btn-secondary,
@@ -470,6 +407,31 @@ p {
     max-width: 100%;
     height: 10rem;
   }
+  
+  .checkout-section h5 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .divider {
+    height: 1px;
+    background-color: #ddd;
+    width: 100%;
+  }
+  .text-button {
+    background: none;
+    border: none;
+    color: #007bff;
+    padding: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .text-button:hover {
+    color: #0056b3;
+  }
+  
   
   
 

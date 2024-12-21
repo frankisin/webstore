@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,11 +9,19 @@ export class LostbornService {
 
   private apiUrl = 'https://localhost:7067'; // Update this with your API URL
 
+  //send token with this request because it has to be authorized...
+
+
   constructor(private http: HttpClient) { }
 
   //LostBorn
   getAllMembers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/LostBorn`);
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
+
+    return this.http.get<any[]>(`${this.apiUrl}/LostBorn`,{ headers });
 
   }
   getMember(id: number): Observable<any> {
@@ -58,6 +66,7 @@ export class LostbornService {
   }
 
   getUserData(id: number): Observable<any> {
+    
     return this.http.get<any>(`${this.apiUrl}/User/${id}`);
   }
 

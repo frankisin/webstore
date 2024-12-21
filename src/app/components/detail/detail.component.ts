@@ -4,8 +4,11 @@ import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
 import { CartService } from '../../services/cartservice.service';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, forkJoin, finalize } from 'rxjs';
+import { LoadingService } from '../../services/loadingService';
 
 interface FragranceImages {
   [key: string]: string;
@@ -24,7 +27,7 @@ export interface CartItem {
   inStock: number;
   averageRating: number;
   imageUrlDetail: string;
-  quantity: number; // You might want to add a quantity property for multiple items of the same product
+  quantity: number; // quantity prop for add to cart.
 }
 
 @Component({
@@ -37,7 +40,7 @@ export interface CartItem {
 
 export class DetailComponent implements OnInit {
 
-  constructor(private cartService: CartService, private router: Router) { } // constructor for cart service...
+  constructor(private cartService: CartService, private router: Router, private snackBar: MatSnackBar,private loadingService : LoadingService) { } // constructor for cart service...
 
   id = '';
   title = '';
@@ -61,22 +64,40 @@ export class DetailComponent implements OnInit {
     this.setDetailDataFromState();
   }
   addToCart(): void {
-    this.cartService.addToCart(this.id, this.quantity).subscribe(
+    this.loadingService.show()
+    this.cartService.addToCart(this.id, this.quantity).pipe(
+      finalize(() => {
+        this.loadingService.hide();  // Hide the overlay once the request completes (either success or error)
+      })
+    ).subscribe(
       (response) => {
-        // Handle success
-        console.log('Item added to cart:', response);
-        // You might want to show a success message or update UI accordingly
-        // Navigate to the current route to trigger a reload
-        location.reload();
-   
+        if (response) {
+          console.log('response: ',response);
+          // Update the cart in the service with the new cart items
+          this.cartService.setCartItems(response.Cart.CartItems); // Update observable
+  
+          // Show success toast only after the item is successfully added
+          this.snackBar.open('Item added to cart!', 'Close', {
+            duration: 3000,
+          });
+  
+          // Additional UI updates can go here (like updating the cart UI)
+        } else {
+          console.error('Unexpected response structure:', response);
+        }
       },
       (error) => {
         // Handle error
         console.error('Error adding item to cart:', error);
-        // You might want to show an error message to the user
+  
+        // Optionally, show an error toast
+        this.snackBar.open('Error adding item to cart. Please try again.', 'Close', {
+          duration: 3000,
+        });
       }
     );
   }
+  
 
   private setDetailDataFromState(): void {
     const cardData = history.state.cardData;

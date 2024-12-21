@@ -1,25 +1,42 @@
 <main class="main">
-    <div class="content">
-        <div class="navbarcontainer">
-            <app-navbar></app-navbar>
-        </div>
-        <app-sidebar></app-sidebar>
-        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" style="padding-top: 4rem;padding-left:5rem">
-            <mat-tab label="Users">
-                <div class="tablecontainer">
-                    <div class="smaller-content"><app-user-table></app-user-table></div> 
-                </div>
-            </mat-tab>
-            <mat-tab label="Products">
-                <div class="smaller-content">
-                    <app-prodtable></app-prodtable>
-                </div>
-            </mat-tab>
-            <mat-tab label="IP Access">
-                <div class="tablecontainer">
-                    <app-table></app-table>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
+  <div class="content">
+    <div class="navbarcontainer">
+      <app-navbar></app-navbar>
     </div>
+    <app-sidebar></app-sidebar>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" style="padding-top: 4rem; padding-left: 5rem;">
+      <mat-tab label="Manage Site Pages">
+        <div class="tablecontainer">
+          <mat-card>
+         
+              <app-image-editor></app-image-editor>
+            
+          </mat-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Manage Users">
+        <div class="tablecontainer">
+          <mat-card>
+            
+              <app-user-table></app-user-table>
+          
+          </mat-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Manage Products">
+       
+          <mat-card>
+            <app-prodtable></app-prodtable>
+          </mat-card>
+       
+      </mat-tab>
+      <mat-tab label="Manage Access">
+        <div class="tablecontainer">
+          <mat-card>
+            <app-table></app-table>
+          </mat-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </main>

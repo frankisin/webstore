@@ -251,7 +251,11 @@ fieldset:disabled .btn {
     font-weight: 700;
     letter-spacing: 0.1rem;
 }
-
+.error {
+    color: #ee0979;
+    font-size: 1.2em; /* Adjust the size as needed */
+    font-weight: bold;
+  }
 header.masthead {
     position: relative;
     overflow: hidden;
@@ -270,7 +274,7 @@ header.masthead::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3); /* Dark overlay, adjust transparency as needed */
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay, adjust transparency as needed */
     z-index: 1;
 }
 
