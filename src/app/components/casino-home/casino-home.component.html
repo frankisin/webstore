@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<div class="casino-container">
+  <div id="page-top" style="margin-top: 3rem;">
+    <!-- Masthead Section -->
+    <header class="nmasthead text-center text-white">
+        <!-- Masthead Content -->
+        <div class="nmasthead-content">
+          <div class="nmasthead-container">
+            <h1 class="nmasthead-subheading">Welcome to Lucky's Casino</h1>
+            <h1 class="nmasthead-heading">The Thrill Awaits</h1>
+            <a class="btn btn-primary btn-xl mt-5" href="/games" style="margin-top: 1rem;">Play Now</a>
+            <p style="margin-top: 5rem;">Experience crafted by {{author}}</p>
+          </div>
+        </div>
+      </header>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <div class="search-input-container">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <input type="text" class="search-input" placeholder="Search your game">
+    </div>
+  </div>
+
+  <!-- Game Categories -->
+  <div class="game-categories">
+    <div class="categories-container">
+      <div class="category-container" *ngFor="let category of gameCategories">
+        <div class="category-header">
+          <i class="fa-solid fa-fire category-icon" style="margin-bottom: 1rem;"></i>
+          <h4>{{ category.name }}</h4>
+        </div>
+        <div class="games-container">
+          <button class="game-button" *ngFor="let game of category.games" (click)="navigateToGame(game.name)">
+            <img [src]="game.imageUrl" alt="{{ game.name }}" class="game-image">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Game Categories -->
+
+  
+  
+  
+  
+</div>

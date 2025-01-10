@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+canvas {
+    background: #222;
+    border: none;
+    display: block; 
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centers the canvas horizontally */
+    align-items: center;    /* Centers the canvas vertically */
+    gap: 5px;              /* Adds spacing between the left panel and the canvas */
+    height: 100vh;          /* Full viewport height */
+    width: 100vw;           /* Full viewport width */
+    box-sizing: border-box;
+}
+
+.left-panel {
+    background-color: #172A3A;
+    min-width: 300px;
+    min-height: 800px;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.left-panel h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.left-panel .form-label {
+    font-size: 14px;
+    color: white;
+}
+
+.left-panel .form-control,
+.left-panel .form-select {
+    background: #222;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+.left-panel .btn-primary {
+    background: linear-gradient(90deg, #33A1FD, #1E90FF);
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.left-panel .btn-primary:hover {
+    transform: scale(1.05);
+}
+
+.stats {
+    margin-top: 20px;
+}

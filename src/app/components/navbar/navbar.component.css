@@ -1,5 +1,19 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+@font-face {
+  font-family: 'Alicia'; /* Font name */
+  src: url('/assets/Allicia.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.custom-title {
+  font-family: 'Alicia', serif; /* Apply Angelos font */
+  font-size: 32px;
+  color: rgb(255, 255, 255);
+  margin-right: 10px;
+
+}
+
 :host {
     position: fixed;
     top: 0%;
@@ -120,4 +134,57 @@ body,
 
 .profile-section span {
   margin-right: 10px;
+}
+
+.wallet-container {
+  display: flex;
+  align-items: center;
+  background-color: #1C2B36; /* Wallet container background */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  background-color: #1C2B36;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
+.balance {
+  margin-right: 5px;
+}
+
+.coin-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.dropdown-arrow {
+  color: #fff;
+  margin-left: 5px;
+  font-size: 7px;
+}
+
+.wallet-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00CC00; /* Blue wallet button background */
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.wallet-button:hover {
+  background-color: #02b002; /* Slightly darker blue on hover */
+}
+
+.wallet-icon {
+  width: 25px;
+  height: 25px;
 }

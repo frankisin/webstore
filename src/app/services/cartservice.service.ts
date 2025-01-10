@@ -43,15 +43,15 @@ export class CartService {
     console.log('Cart items updated:', cartItems); // Add a log to check if this is triggered
     this.cartItemsSubject.next(cartItems); // Trigger all subscribers
   }
-  
+
 
   deleteCartItem(username: string, itemId: number): Observable<any> {
-        //send token with this request because it has to be authorized...
-        const headers = new HttpHeaders({
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        });
+    //send token with this request because it has to be authorized...
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
     const url = `${this.apiUrl}/Carts/${username}/cartitems/${itemId}`;
-    return this.http.delete(url,{headers});
+    return this.http.delete(url, { headers });
   }
   getUserCart(): any {
     return this.userCart;
@@ -114,12 +114,12 @@ export class CartService {
       return of({ error: 'Username not available/Not logged in...' });
     }
 
-        //send token with this request because it has to be authorized...
-        const headers = new HttpHeaders({
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        });
+    //send token with this request because it has to be authorized...
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    });
 
-    return this.http.get(`${this.apiUrl}/User/ByUsername/${username}/Cart`,{headers}).pipe(
+    return this.http.get(`${this.apiUrl}/User/ByUsername/${username}/Cart`, { headers }).pipe(
       // Update local cartItems and notify subscribers
       map((userCart: any) => {
         if (userCart && userCart.CartItems) {
@@ -198,6 +198,4 @@ export class CartService {
       })
     );
   }
-
-
 }

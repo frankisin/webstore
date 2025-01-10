@@ -10,23 +10,35 @@
 }
 .back-button-container {
     position: absolute;
-    top: 10%;
-    left: 5%;
+    top: 75px; /* Adjust to move it down */
+    left: 20px; /* Keep it aligned to the left */
+    z-index: 10; /* Ensure it stays on top of other elements */
 }
+
 .back-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    width: 40px;
-    height: 40px;
-    background-color: rgb(244, 238, 238);
-    color: #f4deaa;
-    border-radius: 60%;
-    text-decoration: none;
-    font-size: 20px;
-    transition: background-color 0.3s;
+    width: 50px;
+    height: 50px;
+    background-color: #1C2B36; /* Button background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add depth */
+    text-decoration: none; /* Remove underline */
+    color: white; /* Icon color */
+    transition: transform 0.2s, background-color 0.2s;
 }
+
+.back-button:hover {
+    background-color: #2A3B48; /* Slightly darker on hover */
+    transform: scale(1.1); /* Enlarge slightly on hover */
+}
+
+.back-button i {
+    font-size: 20px; /* Icon size */
+}
+
+
 
 .transparent-background {
     background: none;
@@ -51,4 +63,13 @@
     width: 110%; /* Use 100% width for responsiveness */
     max-height: 400px; /* Set the maximum height as needed */
     /* Add any other styling you need */
+}
+/* For Webkit browsers (Chrome, Safari, Edge) */
+.col-md-6 {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+.col-md-6::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
 }

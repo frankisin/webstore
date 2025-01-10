@@ -1,0 +1,106 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Left Panel -->
+    <div class="left-panel">
+      <div class="back-and-settings">
+        <!-- Back Button -->
+        <button class="back-button" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+    
+        <!-- Settings Icon -->
+        <button class="settings-button" (click)="openSettings()">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+      <div class="separator"></div> <!-- Horizontal separator -->
+      <h2>Bet Settings</h2>
+      <form>
+        <div class="form-group">
+          <label for="betAmount">Amount</label>
+          <div class="rounded-input-group">
+            <!-- Input Field -->
+            <div class="input-with-icon">
+              <img src="assets/coin.png" alt="Coin Icon" class="coin-icon">
+              <input
+                type="number"
+                id="betAmount"
+                [(ngModel)]="betAmount"
+                class="form-control bet-input"
+                name="userBalance"
+                placeholder="0.00"
+              />
+            </div>
+            <!-- Buttons -->
+            <button type="button" class="btn-half" (click)="halveBet()">½</button>
+            <button type="button" class="btn-double" (click)="doubleBet()">2×</button>
+          </div>
+          
+        </div>
+        
+        <div class="form-group">
+          <label for="riskLevel">Risk</label>
+          <select
+            id="riskLevel"
+            [(ngModel)]="riskLevel"
+            class="form-select"
+            name="riskLevel" 
+          >
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rows">Rows</label>
+          <select
+            id="rows"
+            [(ngModel)]="rows"
+            class="form-select"
+            name="rows">
+            <option value="8">8</option>
+            <option value="12">12</option>
+            <option value="16">16</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button type="button" class="btn" (click)="playGame()" style="font-family: Arial, Helvetica, sans-serif;">PLAY</button>
+          <button type="button" class="btn" (click)="spawnBalls(100)">SPAWN 100</button>
+          <button type="button" class="btn" (click)="spawnBalls(1000)">SPAWN 1000</button>
+        </div>
+      </form>
+      
+      <div class="stats" *ngIf="showStatistics">
+        <div class="separator"></div> <!-- Horizontal separator -->
+        <h3>Statistics for nerds</h3>
+        <p>User Balance: ${{ userBalance | number:'1.2-2' }}</p>
+        <p>Total Balls: {{ totalBallsSpawned }}</p>
+        <ul>
+          <li *ngFor="let stat of multiplierStats">
+            {{ stat.multiplier }}x: {{ stat.count }} ({{ stat.percentage }}%)
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Canvas -->
+    <div class="canvas-wrapper">
+      <canvas #plinkoCanvas id="plinkoCanvas"></canvas>
+    </div>
+    <div class="slot-container">
+      <div class="slot-inner">
+        <div class="slot-item" *ngFor="let item of lastFourScores" [style.color]="multiplierColors[item.score] || '#FFFFFF'">
+          {{ item.score }}x
+        </div>
+        
+      </div>
+    </div>
+    <!-- Bottom Panel -->
+    <div class="bottom-panel">
+      <span class="custom-title">Fragrance</span>
+      
+    </div>
+    
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { UserService } from '../../services/userService';
 import { LostbornService } from '../../services/lostborn.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CasinoService } from '../../services/casinoservice.service';
 
 @Component({
   selector: 'app-navbar',
@@ -22,10 +23,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   curUser: string = '';
   totalCartQuantity: number = 0;
   userProfilePicUrl: string = 'https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp';
+  walletBalance: number = 0.0;
 
   private cartItemsSubscription: Subscription | undefined;
 
-  constructor(private lostService: LostbornService, private userService: UserService, public cartService: CartService, private authService: AuthService, private router: Router) { }
+  constructor(private casinoService:CasinoService, private lostService: LostbornService, private userService: UserService, public cartService: CartService, private authService: AuthService, private router: Router) { }
 
 
   ngOnDestroy(): void {
@@ -37,6 +39,26 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isAdmin = false;
     this.isAdmin = this.authService.isAdmin();
+
+    //fetch User Balance...
+    const userId = 1; // Replace with dynamic user ID logic if needed
+    
+    
+
+    this.casinoService.userBalance$.subscribe({
+      next: (balance) => {
+        this.walletBalance = balance;
+        //console.log('Navbar updated balance:', this.walletBalance);
+      },
+      error: (err) => console.error('Failed to update navbar balance:', err),
+    });
+
+    // Fetch initial balance
+    this.casinoService.getUserBalance(this.casinoService.userId).subscribe({
+      next: (initialBalance) => this.walletBalance = initialBalance.userBalance,
+      error: (err) => console.error('Failed to fetch initial balance:', err),
+    });
+    
     
     try {
       this.curUser = this.userService.getUserName();
@@ -49,7 +71,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
       // Subscribe to changes in cartItems$
       this.cartItemsSubscription = this.cartService.cartItems$.subscribe((cartItems) => {
-        console.log('Cart items updated:', cartItems);
+        //console.log('Cart items updated:', cartItems);
         // Update your view logic here based on the new cartItems
       });
 
@@ -61,8 +83,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       console.log(ex);
     }
   }
-
-
   getCartItemCount(): number {
     const cartItems = this.cartService.getCartItems();
     return cartItems ? cartItems.length : 0;

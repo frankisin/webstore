@@ -8,8 +8,9 @@ import { routes } from './app.routes';
 import { AdminGuard } from './services/adminGuardService';
 import { BusyOverlayComponent } from './components/busy-overlay/busy-overlay.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),provideHttpClient(),provideAnimations(),CartService,UserService,AdminGuard,BusyOverlayComponent,BreadcrumbComponent],
+  providers: [provideRouter(routes),provideHttpClient(),provideAnimations(),SafeHtmlPipe,CartService,UserService,AdminGuard,BusyOverlayComponent,BreadcrumbComponent],
 
 };

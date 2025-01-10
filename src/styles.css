@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@fortawesome/fontawesome-free/css/all.css";
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -11306,11 +11308,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     top: -5rem;
     right: 35%;
   }
+  .col-md-6 {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+.col-md-6::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
   
   @media (min-width: 992px) {
     header.masthead {
       padding-top: calc(10rem + 55px);
-      padding-bottom: 10rem;
+      padding-bottom: 5rem;
     }
     header.masthead .masthead-content .masthead-heading {
       font-size: 6rem;
@@ -11319,3 +11329,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       font-size: 4rem;
     }
   }
+  

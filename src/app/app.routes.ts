@@ -12,6 +12,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './services/authGuardService';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { GameComponent } from './components/game/game.component';
+import { CasinoComponent } from './components/casino/casino.component';
+import { CasinoHomeComponent } from './components/casino-home/casino-home.component';
+import { DiceComponent } from './components/dice/dice.component';
+import { MinesComponent } from './components/mines/mines.component';
 
 export const routes: Routes = [
     { path: '',   redirectTo: '/home', pathMatch: 'full' },
@@ -24,5 +28,9 @@ export const routes: Routes = [
     { path: 'login', component:LoginComponent},
     { path: 'register', component:RegisterComponent},
     { path: 'profile',component:ProfileComponent,canActivate:[AuthGuard]},
-    { path: 'game',component:GameComponent,canActivate:[AuthGuard,AdminGuard]}
+    { path: 'game',component:GameComponent,canActivate:[AuthGuard,AdminGuard]},
+    { path: 'plinko',component:CasinoComponent,canActivate:[AuthGuard,AdminGuard]},
+    { path: 'dice',component:DiceComponent,canActivate:[AuthGuard,AdminGuard]},
+    { path: 'casino-home',component:CasinoHomeComponent,canActivate:[AuthGuard,AdminGuard]},
+    { path: 'mines',component:MinesComponent,canActivate:[AuthGuard,AdminGuard]}
 ];

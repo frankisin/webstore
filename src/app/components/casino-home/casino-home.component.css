@@ -1,0 +1,686 @@
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-width: 100% !important; /* Override Bootstrap's max-width */
+    width: 100%;
+    height: 100%;
+    background-color: #0F212D;
+    gap:5x;
+  }
+  
+  .main-content {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Left Panel Styling */
+.left-panel {
+    width: 22%; /* Slightly increase width for better proportions */
+    background-color: #1C2B36; /* Darker background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    margin: 16px; /* Space around the panel */
+    margin-top: 5rem;
+    color: #fff;
+    padding: 20px; /* Padding inside the panel for better spacing */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    gap: 16px; /* Add consistent spacing between elements */
+    overflow-y: auto;
+    font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+  }
+  
+  .left-panel h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 16px; /* Add space below the heading */
+  }
+  
+  .left-panel h3 {
+    font-weight: bold;
+    margin-top: 32px; /* Space above statistics section */
+    margin-bottom: 16px; /* Space below the subheading */
+  }
+  
+  .left-panel .form-group {
+    margin-bottom: 16px; /* Add space below each form group */
+  }
+  
+  .left-panel .form-label {
+    font-size: 0.9rem;
+    display: block; /* Ensure labels are above inputs */
+    margin-bottom: 8px; /* Add spacing between label and input */
+
+  }
+  
+  .left-panel input,
+  .left-panel select {
+    background-color: #253b4a; /* Input background */
+    border: none;
+    width: 100%; /* Full width of the form group */
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px; /* Increase padding for better usability */
+    font-size: 1rem; /* Font size for inputs */
+  }
+  
+  .left-panel input:focus,
+  .left-panel select:focus {
+    outline: none;
+    box-shadow: 0 0 5px #2196F3; /* Highlight on focus */
+  }
+  
+  .left-panel .button-group {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 5px; /* Add space between buttons */
+  }
+  
+  .left-panel .btn {
+    background-color: #2196F3; /* Blue buttons */
+    border: none;
+    padding: 12px; /* Increase padding for larger buttons */
+    font-size: 1rem; /* Consistent font size */
+    border-radius: 5px;
+    text-align: center; /* Center text inside buttons */
+    cursor: pointer;
+  }
+  
+  .left-panel .btn:hover {
+    background-color: #1976D2; /* Slightly darker on hover */
+  }
+  
+  .left-panel .stats {
+    margin-top: 5px; /* Add spacing above the stats section */
+  }
+  
+  .left-panel .stats ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .left-panel .stats ul li {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-family: 'Arial', sans-serif; /* Ensure font consistency */
+  }
+  
+  .canvas-wrapper {
+    flex: 1; /* 70% of width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0F212D;
+    padding: 10px;
+  }
+  
+  #plinkoCanvas {
+    width: 100%;
+    height: 100%;
+  }
+  /* Bottom Panel Styling */
+.bottom-panel {
+    position: absolute;
+    bottom: 2%;
+ 
+    width: 100%;
+    background-color: #1C2B36;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    z-index: 10; /* Ensure it is above the canvas */
+    text-align: center;
+  }
+  
+  .bottom-panel h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .bottom-panel p {
+    margin-bottom: 1rem;
+  }
+  
+  .bottom-panel ul.stats-columns {
+    display: flex; /* Flexbox layout */
+    flex-direction: row; /* Arrange items in columns */
+    justify-content: space-around; /* Evenly distribute the stats */
+    gap: 10px; /* Space between columns */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .bottom-panel ul.stats-columns li {
+    font-size: 1rem;
+    color: #fff;
+    background-color: #253b4a; /* Add some styling to each stat */
+    padding: 8px 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    min-width: 120px; /* Set a minimum width for consistency */
+    text-align: center; /* Center the text */
+  }
+  .custom-title {
+    font-family: 'Alicia', serif; /* Apply Angelos font */
+    font-size: 22px;
+    color: rgb(255, 255, 255);
+    margin-right: 10px;
+  
+  }
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .input-group .btn {
+    padding: 5px 10px;
+    font-size: 1rem;
+  }
+  .casino-container {
+    padding: 20px;
+  }
+  
+  .jumbotron img {
+    height: 30rem;
+    object-fit: fill;
+  }
+  
+  .search-bar {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .search-bar input {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .game-categories {
+    margin-top: 30px;
+  }
+  
+  .categories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .category h4 {
+    margin-bottom: 10px;
+  }
+  
+  .games {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .game-card {
+    width: 150px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .game-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .game-card p {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  /* Rounded corners for images */
+.rounded-corners {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional: Adds a soft shadow for depth */
+  }
+  
+  /* Make next and previous images partially visible */
+  .partially-visible .carousel-inner {
+    display: flex;
+    overflow: visible; /* Ensures images outside the main frame are visible */
+    justify-content: center;
+    gap: 15px; /* Adds space between images */
+  }
+  
+  .carousel-item {
+    flex: 0 0 auto;
+    transition: transform 0.5s ease-in-out; /* Smooth transitions */
+  }
+  /* Casino Container Background */
+.casino-container {
+    background: linear-gradient(to bottom right, #141e30, #243b55); /* Your original gradient */
+    min-height: 100vh; /* Full-screen height */
+    color: white;
+    text-align: center; /* Center text */
+    padding: 20px;
+  }
+  
+  /* Center the Search Bar */
+  .search-bar {
+    margin: 20px auto;
+  }
+  
+  .centered-input {
+    width: 50%; /* Center width */
+    margin: 0 auto; /* Center horizontally */
+    display: block;
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  /* Jumbotron Style */
+  .jumbotron {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .rounded-corners {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+ /* Categories Section */
+.game-categories {
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .categories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Space between categories */
+  }
+  
+  /* Adjusted Category Container */
+/* Adjusted Category Container */
+.category-container {
+    display: flex;
+    flex-direction: column; /* Stack header and games vertically */
+    align-items: center; /* Center content horizontally */
+    gap: 0.5rem; /* Reduce spacing between header and games */
+    text-align: center;
+    margin-bottom: 2rem; /* Space between categories */
+  }
+  
+  /* Horizontal Category Header */
+  .category-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: left; /* Align text to the left */
+    color: white;
+    margin-bottom: 0.5rem; /* Slight space below header */
+  }
+  
+  /* Games Container */
+  .games-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center-align games horizontally */
+    gap: 1rem; /* Space between game cards */
+  }
+  
+  /* Game Button */
+  .game-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .game-image {
+    width: 120px; /* Adjust size as needed */
+    height: 120px;
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+  }
+  
+  .game-image:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+  }
+  
+  
+  
+  /* Game Button */
+  .game-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .game-image {
+    width: 120px; /* Adjust size as needed */
+    height: 120px;
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+  }
+  
+  .game-image:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+  }
+  
+  
+  .games {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center; /* Center game cards */
+  }
+  
+  .game-card {
+    width: 150px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent */
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .game-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .game-card p {
+    margin-top: 10px;
+    font-weight: bold;
+    color: white;
+  }
+  /* Game Button Styling */
+.game-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    width: 180px; /* Increased button size */
+    height: 15rem; /* Keep it proportional */
+    display: inline-block;
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+  }
+  
+  /* Game Image Styling */
+  .game-button .game-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the button area */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow */
+  }
+  
+  /* Hover Effect */
+  .game-button:hover {
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+  }
+  
+  .game-button .game-image:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Add a more pronounced shadow on hover */
+  }
+  /* Search Bar Container */
+.search-bar {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Search Input Container */
+  .search-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #1a273a; /* Darker shade of the background */
+    border-radius: 20px; /* Less rounded corners */
+    padding: 5px 10px;
+    width: 50%; /* Center width */
+    height: 3rem;
+  }
+  
+  /* Input Field */
+  .search-input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 1rem;
+    padding-left: 30px; /* Add padding for the icon */
+  }
+  
+  /* Search Icon */
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    color: #7a869a; /* Muted color for the icon */
+    font-size: 1rem;
+  }
+  
+  /* Input Placeholder Styling */
+  .search-input::placeholder {
+    color: #7a869a; /* Matches the icon color */
+  }
+  
+  /* Focus Effect */
+  .search-input-container:focus-within {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Subtle glow on focus */
+  }
+  /* Jumbotron */
+.jumbotron {
+    margin: 0 auto;
+    max-width: 80%; /* Constrain the width */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Ensures content stays inside the rounded edges */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    position: relative;
+    background-color: #0F212D; /* Matches the dark theme */
+  }
+  
+  /* Carousel */
+  .carousel-inner {
+    border-radius: 10px; /* Match the jumbotron's rounded edges */
+  }
+  
+  .carousel img {
+    height: 20rem; /* Constrain height for consistency */
+    object-fit: cover; /* Ensure images cover the area without distortion */
+  }
+  
+  /* Indicators */
+  .carousel-indicators button {
+    background-color: #ffffff; /* White dots for indicators */
+    opacity: 0.7; /* Slight transparency */
+    border: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%; /* Circle indicators */
+    margin: 0 5px;
+  }
+  
+  .carousel-indicators button.active {
+    background-color: #fbbd14; /* Highlight active indicator */
+    opacity: 1; /* Fully opaque */
+  }
+  
+  /* Navigation Controls */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    filter: brightness(0.8); /* Dim the arrows slightly */
+  }
+  
+  .carousel-control-prev-icon:hover,
+  .carousel-control-next-icon:hover {
+    filter: brightness(1); /* Brighten on hover */
+  }
+/* Masthead */
+header.nmasthead {
+    position: relative;
+    overflow: hidden;
+    height: 40vh; /* Set fixed height */
+    width: 75vw; /* Adjust width */
+    margin: 0 auto; /* Center horizontally */
+    display: flex;
+    flex-direction: column; /* Stack content */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    background: url('../../../assets/casino6.png') center center/cover no-repeat; /* Full-width background image */
+    border-radius: 20px; /* Rounded corners */
+    padding: 0 20px; /* Add left and right padding */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for depth */
+  }
+  
+  header.nmasthead::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay for better text visibility */
+    z-index: 1;
+    border-radius: 20px; /* Ensure overlay follows rounded corners */
+  }
+  
+  header.nmasthead .nmasthead-content {
+    position: relative; /* Place content above the overlay */
+    z-index: 2; /* Ensure content is above the image and overlay */
+    text-align: center; /* Center align text */
+    max-width: 900px; /* Limit width of the content */
+    padding: 0 20px; /* Add left and right padding */
+    color: white; /* Ensure text is visible */
+  }
+  
+  /* Subheading */
+  .nmasthead-subheading {
+    font-size: 3rem;
+    margin-bottom: 40px; /* Adjust space below */
+    margin-top: 0; /* Adjust space above */
+  }
+  
+  /* Heading */
+  .nmasthead-heading {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 10px 0; /* Space above and below heading */
+  }
+  
+  /* Button Styling */
+  .nmasthead-content .btn {
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    background-color: #fbbd14;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease-in-out;
+    border-radius: 50px; /* Rounded button style */
+  }
+  
+  .nmasthead-content .btn:hover {
+    background-color: #dca10d;
+  }
+  .game-categories {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    padding: 20px;
+  }
+  
+  .categories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between categories */
+    width: 78%; /* Reduced width */
+    margin: auto; /* Center horizontally */
+  }
+  
+  .category-container {
+    background-color: #1c2b36; /* Dark background for each category */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  }
+  
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    font-size: 1.5rem; /* Adjust font size */
+    font-weight: bold;
+    color: #fff; /* Text color */
+  }
+  
+  .category-icon {
+    font-size: 1.2rem; /* Adjust icon size */
+    color: white; 
+  }
+  
+  .games-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between game buttons */
+
+  }
+  
+  .game-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .game-button:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  
+  .game-image {
+    width: 100px; /* Adjust game image size */
+    height: 100px; /* Keep it square */
+    border-radius: 10px; /* Optional: Rounded corners for images */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  
+  .game-button:hover .game-image {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  }
+  
+  
+  

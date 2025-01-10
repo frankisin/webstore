@@ -1,0 +1,128 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <div class="back-and-settings">
+                <!-- Back Button -->
+                <button class="back-button" (click)="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+
+                <!-- Settings Icon -->
+                <button class="settings-button" (click)="openSettings()">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+            <div class="separator"></div> <!-- Horizontal separator -->
+            <h2>Bet Settings</h2>
+            <form>
+                <div class="form-group">
+                    <label for="betAmount">Amount</label>
+                    <div class="rounded-input-group">
+                        <!-- Input Field -->
+                        <div class="input-with-icon">
+                            <img src="assets/coin.png" alt="Coin Icon" class="coin-icon">
+                            <input type="number" id="betAmount" [(ngModel)]="betAmount" class="form-control bet-input"
+                                name="userBalance" placeholder="0.00" />
+                        </div>
+                        <!-- Buttons -->
+                        <button type="button" class="btn-half" (click)="halveBet()">½</button>
+                        <button type="button" class="btn-double" (click)="doubleBet()">2×</button>
+                    </div>
+
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn" (click)="playGame()"
+                        style="font-family: Arial, Helvetica, sans-serif;">PLAY</button>
+                </div>
+            </form>
+
+
+        </div>
+   
+
+        <!-- Canvas -->
+        <div class="dice-game">
+
+
+            <!-- Stats Box and Slider -->
+            <div class="stats-box dice-game-container">
+                <div class="slider-container">
+                    <div class="die" [style.left]="diePosition + '%'">
+                        <img src="assets/die.png" alt="Die" class="die-image" />
+                        <span class="roll-value" [ngStyle]="{
+                                color: isWin === true ? '#00e100' : isWin === false ? 'red' : 'black'
+                            }">
+                            {{ rollValue.toFixed(2) }}
+                        </span>
+                    </div>
+                    <div class="slider-track" #sliderTrack>
+                        <!-- Red Progress Bar -->
+                        <div class="slider-progress" [style.width]="thumbPosition + '%'"></div>
+
+                        <!-- Green Progress Bar -->
+                        <div class="slider-green" [style.left]="thumbPosition + '%'"
+                            [style.width]="100 - thumbPosition + '%'"></div>
+
+                        <!-- Thumb -->
+                        <div class="slider-thumb" #sliderThumb [style.left]="thumbPosition + '%'"
+                            (mousedown)="startDragging($event)">
+                        </div>
+
+                    </div>
+                    <!-- Labels -->
+                    <div class="slider-labels">
+                        <span>0</span>
+                        <span>25</span>
+                        <span>50</span>
+                        <span>75</span>
+                        <span>100</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Panel -->
+        <div class="bottom-panel">
+            <div class="stats-row">
+                <!-- Winnings -->
+                <div class="stats-box">
+                    <label for="winnings">Winnings</label>
+                    <div class="input-group">
+                        <input type="number" id="winnings" value="{{ getMultiplier().toFixed(2) }}" class="stats-input"
+                            placeholder="0.0000" readonly />
+                        <span class="icon">X</span>
+                    </div>
+                </div>
+
+                <!-- Roll Over -->
+                <div class="stats-box">
+                    <label for="rollOver">Roll Over</label>
+                    <div class="input-group">
+                        <input type="number" id="rollOver" value="{{rollOver}}" class="stats-input"
+                            placeholder="50.50" />
+                        <span class="icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Win Chance -->
+                <div class="stats-box">
+                    <label for="winChance">Win Chance</label>
+                    <div class="input-group">
+                        <input type="number" id="winChance" [(ngModel)]="winChance" class="stats-input"
+                            placeholder="49.5000" readonly />
+                        <span class="icon">%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
